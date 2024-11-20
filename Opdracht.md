@@ -50,11 +50,11 @@
 ## Authenticatie
 
 * Uitwerken authenticatie is niet nodig
-  * Frontend
-    * AuthService die een rol / user bijhoudt
-    * Wijzigen rol / user via login scherm, geen communicatie met backend nodig 
-  * Backend
-    * Leest rol / user uit de header en gebruikt in de logica
+* Frontend
+  * AuthService die een rol / user bijhoudt
+  * Wijzigen rol / user via login scherm, geen communicatie met backend nodig 
+* Backend
+  * Leest rol / user uit de header en gebruikt in de logica
 
 ## Extra Informatie
 
