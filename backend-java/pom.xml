@@ -6,11 +6,12 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>be.pxl.services</groupId>
 	<artifactId>backend-java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>backend-java</name>
 	<description>backend-java</description>
 	<url/>
@@ -20,6 +21,11 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>review-service</module>
+		<module>comment-service</module>
+		<module>post-service</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
