@@ -25,7 +25,7 @@ public class PostService implements IPostService {
                 .build()).toList();
     }
 
-    public void createPost(PostRequest postRequest) {
+    public PostResponse createPost(PostRequest postRequest) {
         Post post = Post.builder()
                 .reviewId(postRequest.getReviewId())
                 .title(postRequest.getTitle())
@@ -34,5 +34,12 @@ public class PostService implements IPostService {
                 .status(postRequest.getStatus())
                 .build();
         postRepository.save(post);
+        return PostResponse.builder()
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .build();
     }
 }
