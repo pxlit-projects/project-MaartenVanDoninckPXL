@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postservice_db:
+    image: mysql:latest
+    container_name: postservice_db
+    environment:
+      MYSQL_DATABASE: postservice_db
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    ports:
+      - "3310:3306"
+    networks:
+      - backend-java
+
+  reviewservice_db:
+    image: mysql:latest
+    container_name: reviewservice_db
+    environment:
+      MYSQL_DATABASE: reviewservice_db
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    ports:
+      - "3311:3306"
+    networks:
+      - backend-java
+
+  commentservice_db:
+    image: mysql:latest
+    container_name: commentservice_db
+    environment:
+      MYSQL_DATABASE: commentservice_db
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    ports:
+      - "3312:3306"
+    networks:
+      - backend-java
+
+networks:
+  backend-java:
+    driver: bridge

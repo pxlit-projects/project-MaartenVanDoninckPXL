@@ -1,4 +1,4 @@
-package be.pxl.services.service;
+package be.pxl.services.services;
 
 import be.pxl.services.domain.Post;
 

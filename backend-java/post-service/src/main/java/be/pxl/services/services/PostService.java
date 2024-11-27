@@ -1,7 +1,7 @@
-package be.pxl.services.service;
+package be.pxl.services.services;
 
 import be.pxl.services.domain.Post;
-import be.pxl.services.repository.IPostRepository;
+import be.pxl.services.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostService implements IPostService {
 
-    private final IPostRepository postRepository;
+    private final PostRepository postRepository;
 
-    @Override
     public List<Post> getPosts() {
         return postRepository.findAll();
     }

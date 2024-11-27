@@ -1,7 +1,7 @@
-package be.pxl.services.service;
+package be.pxl.services.services;
 
 import be.pxl.services.domain.Review;
-import be.pxl.services.repository.IReviewRepository;
+import be.pxl.services.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewService implements IReviewService {
 
-    private final IReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
 
-    @Override
     public List<Review> getReviews() {
         return reviewRepository.findAll();
     }

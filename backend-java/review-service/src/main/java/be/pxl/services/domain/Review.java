@@ -6,24 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
+@Table(name = "reviews")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Review {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Long postId;
-
-    @Enumerated(EnumType.STRING)
-    private ReviewStatus status;
-
-    private Long reviewerId;
-    private String comment;
-    private LocalDateTime dateTime;
+    private String author;
+    private String content;
 }
