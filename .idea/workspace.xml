@@ -5,35 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1af6eaca-088b-4ec3-be9a-9d5947c03615" name="Changes" comment="Aanmaken arichitectuur schema">
-      <change afterPath="$PROJECT_DIR$/backend-java/Opdracht.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/comment-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/comment-service/src/main/java/be/pxl/services/CommentServiceApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/comment-service/src/main/java/be/pxl/services/controller/CommentController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/comment-service/src/main/java/be/pxl/services/domain/Comment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/comment-service/src/main/java/be/pxl/services/repository/ICommentRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/comment-service/src/main/java/be/pxl/services/service/CommentService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/comment-service/src/main/java/be/pxl/services/service/ICommentService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/comment-service/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend-java/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/post-service/src/main/java/be/pxl/services/controller/PostController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/post-service/src/main/java/be/pxl/services/domain/Category.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/post-service/src/main/java/be/pxl/services/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend-java/post-service/src/main/java/be/pxl/services/domain/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/post-service/src/main/java/be/pxl/services/domain/PostStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/post-service/src/main/java/be/pxl/services/repository/IPostRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/post-service/src/main/java/be/pxl/services/service/IPostService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/post-service/src/main/java/be/pxl/services/service/PostService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/post-service/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/review-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/review-service/src/main/java/be/pxl/services/ReviewServiceApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/review-service/src/main/java/be/pxl/services/controller/ReviewController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/review-service/src/main/java/be/pxl/services/domain/Review.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/review-service/src/main/java/be/pxl/services/domain/ReviewStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/review-service/src/main/java/be/pxl/services/repository/IReviewRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/review-service/src/main/java/be/pxl/services/service/IReviewService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/review-service/src/main/java/be/pxl/services/service/ReviewService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend-java/review-service/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-web/Opdracht.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,46 +21,53 @@
     &quot;assignee&quot;: &quot;MaartenVanDoninckPXL&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/pxlit-projects/project-MaartenVanDoninckPXL.git&quot;,
-    &quot;accountId&quot;: &quot;de78f29f-a437-4526-ab6c-bb05b10e0760&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/pxlit-projects/project-MaartenVanDoninckPXL.git",
+    "accountId": "c3c27647-21ae-415d-8e0b-f581abefb88b"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2omx8ohN51tthrwBGrwjAdBfWIy" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/maart/Documents/PXL/3TIN/Fullstack Java/project-MaartenVanDoninckPXL&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.36206895&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/maart/Documents/PXL/3TIN/Fullstack Java/project-MaartenVanDoninckPXL/frontend-web",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.36206895",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\maart\Documents\PXL\3TIN\Fullstack Java\project-MaartenVanDoninckPXL\frontend-web" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-WS-243.21565.180" />
       </set>
     </attachedChunks>
   </component>
