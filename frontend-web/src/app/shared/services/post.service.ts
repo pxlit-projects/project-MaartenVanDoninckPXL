@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class PostService {
-  private api: string = environment.apiUrl + 'post/api/post';
+  api: string = environment.apiUrl + '/api/posts';
   http: HttpClient = inject(HttpClient);
 
   getPosts() {
