@@ -24,7 +24,9 @@ export class AddPostComponent {
 
   onSubmit() {
     if (this.postForm.valid) {
-      const newPost: Post = { ...this.postForm.value };
+      const newPost: Post = {
+        ...this.postForm.value
+      };
       this.postService.addPost(newPost).subscribe(() => {
         this.postForm.reset();
         this.router.navigate(['/posts']);

@@ -20,6 +20,7 @@
 
 * **US1:** Als ``redacteur`` wil ik nieuwe ``posts`` kunnen aanmaken, zodat ik nieuws en updates kan delen met de organisatie.
   * Een redacteur moet in staat zijn om een nieuw artikel te schrijven en op te slaan in het systeem.
+  * **Completed**
 * **US2:** Als ``redacteur`` wil ik ``posts`` kunnen opslaan als concept, zodat ik er later aan kan verderwerken of kan wachten op goedkeuring.
   * Een redacteur moet een artikel kunnen opslaan als concept, zodat het later kan worden bewerkt of beoordeeld.
 * **US3:** Als ``redacteur`` wil ik de inhoud van een ``post`` kunnen bewerken, zodat ik fouten kan corrigeren en inhoud kan bijwerken.

@@ -11,8 +11,6 @@ export class PostService {
   api: string = environment.apiUrl + '/post/api/posts';
   http: HttpClient = inject(HttpClient);
 
-  constructor() {}
-
   getPosts() {
     return this.http.get<Post[]>(this.api);
   }
