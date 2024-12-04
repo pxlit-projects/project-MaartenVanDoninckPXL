@@ -8,8 +8,8 @@ spring:
         corsConfigurations:
           '[/**]':
             allowedOrigins:
-              - "*"
-              - "http://localhost:4200/*"
+              - "http://localhost"
+              - "http://localhost:4200"
             allowedMethods:
               - "*"
             allowedHeaders:
