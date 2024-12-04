@@ -18,14 +18,28 @@ export class AddPostComponent {
   fb: FormBuilder = inject(FormBuilder);
   postForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
-    body: ['', Validators.required],
+    content: ['', Validators.required],
     author: ['', Validators.required],
+    status: ['PENDING', Validators.required]
   });
 
   onSubmit() {
     if (this.postForm.valid) {
       const newPost: Post = {
         ...this.postForm.value
+      };
+      this.postService.addPost(newPost).subscribe(() => {
+        this.postForm.reset();
+        this.router.navigate(['/posts']);
+      });
+    }
+  }
+
+  onDraft() {
+    if (this.postForm.valid) {
+      const newPost: Post = {
+        ...this.postForm.value,
+        status: 'DRAFT'
       };
       this.postService.addPost(newPost).subscribe(() => {
         this.postForm.reset();
