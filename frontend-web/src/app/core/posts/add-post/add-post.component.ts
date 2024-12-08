@@ -23,14 +23,19 @@ export class AddPostComponent {
     status: ['PENDING', Validators.required]
   });
 
+  errorMessage: string | null = null;
+
   onSubmit() {
     if (this.postForm.valid) {
       const newPost: Post = {
         ...this.postForm.value
       };
-      this.postService.addPost(newPost).subscribe(() => {
-        this.postForm.reset();
-        this.router.navigate(['/posts']);
+      this.postService.addPost(newPost).subscribe({
+        next: () => {
+          this.postForm.reset();
+          this.router.navigate(['/posts']);
+        },
+        error: (error) => this.errorMessage = error.message
       });
     }
   }
@@ -41,9 +46,12 @@ export class AddPostComponent {
         ...this.postForm.value,
         status: 'DRAFT'
       };
-      this.postService.addPost(newPost).subscribe(() => {
-        this.postForm.reset();
-        this.router.navigate(['/posts']);
+      this.postService.addPost(newPost).subscribe({
+        next: () => {
+          this.postForm.reset();
+          this.router.navigate(['/posts']);
+        },
+        error: (error) => this.errorMessage = error.message
       });
     }
   }
