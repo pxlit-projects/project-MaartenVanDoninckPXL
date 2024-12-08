@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
+import {Post} from "../../../shared/models/post.model";
 
 @Component({
   selector: 'app-post-item',
@@ -11,5 +12,5 @@ import {NgOptimizedImage} from "@angular/common";
   styleUrl: './post-item.component.css'
 })
 export class PostItemComponent {
-
+  @Input() post!: Post;
 }
