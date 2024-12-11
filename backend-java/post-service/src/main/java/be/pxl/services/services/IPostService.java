@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface IPostService {
     List<PostResponse> getPosts();
-
+    List<PostResponse> getDraftPosts();
+    List<PostResponse> getApprovedPosts();
     PostResponse createPost(PostRequest postRequest);
 }

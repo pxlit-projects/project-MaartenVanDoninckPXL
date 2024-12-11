@@ -1,9 +1,9 @@
-import {inject, Injectable} from '@angular/core';
-import {environment} from "../../../environments/environment.development";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Post} from "../models/post.model";
-import {Observable, throwError} from "rxjs";
-import {catchError} from "rxjs/operators";
+import { inject, Injectable } from '@angular/core';
+import { environment } from "../../../environments/environment.development";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Post } from "../models/post.model";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,18 @@ export class PostService {
 
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.api).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getPostsInDraft(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.api + '/draft').pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getApprovedPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.api + '/approved').pipe(
       catchError(this.handleError)
     );
   }

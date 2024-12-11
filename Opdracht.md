@@ -23,6 +23,7 @@
   * **Completed**
 * **US2:** Als ``redacteur`` wil ik ``posts`` kunnen opslaan als concept, zodat ik er later aan kan verderwerken of kan wachten op goedkeuring.
   * Een redacteur moet een artikel kunnen opslaan als concept, zodat het later kan worden bewerkt of beoordeeld.
+  * **Completed**
 * **US3:** Als ``redacteur`` wil ik de inhoud van een ``post`` kunnen bewerken, zodat ik fouten kan corrigeren en inhoud kan bijwerken.
   * Een redacteur moet bestaande artikelen kunnen aanpassen om fouten te corrigeren of nieuwe informatie toe te voegen.
 * **US4:** Als ``gebruiker`` wil ik een overzicht van gepubliceerde ``posts`` kunnen zien, zodat ik op de hoogte blijf van het laatste nieuws.

@@ -26,6 +26,7 @@ export class AddPostComponent {
   errorMessage: string | null = null;
 
   onSubmit() {
+    this.errorMessage = null;
     if (this.postForm.valid) {
       const newPost: Post = {
         ...this.postForm.value
@@ -37,10 +38,13 @@ export class AddPostComponent {
         },
         error: (error) => this.errorMessage = error.message
       });
+    } else {
+      this.errorMessage = 'Please fill out the form before submitting';
     }
   }
 
   onDraft() {
+    this.errorMessage = null;
     if (this.postForm.valid) {
       const newPost: Post = {
         ...this.postForm.value,
@@ -53,6 +57,8 @@ export class AddPostComponent {
         },
         error: (error) => this.errorMessage = error.message
       });
+    } else {
+      this.errorMessage = 'Please fill out the form before saving as draft';
     }
   }
 

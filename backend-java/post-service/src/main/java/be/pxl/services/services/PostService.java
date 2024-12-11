@@ -1,6 +1,7 @@
 package be.pxl.services.services;
 
 import be.pxl.services.domain.Post;
+import be.pxl.services.domain.Status;
 import be.pxl.services.domain.dto.PostRequest;
 import be.pxl.services.domain.dto.PostResponse;
 import be.pxl.services.repository.PostRepository;
@@ -17,6 +18,28 @@ public class PostService implements IPostService {
 
     public List<PostResponse> getPosts() {
         return postRepository.findAll().stream().map(post -> PostResponse.builder()
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .build()).toList();
+    }
+
+    @Override
+    public List<PostResponse> getDraftPosts() {
+        return postRepository.findAllByStatus(Status.valueOf("DRAFT")).stream().map(post -> PostResponse.builder()
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .build()).toList();
+    }
+
+    @Override
+    public List<PostResponse> getApprovedPosts() {
+        return postRepository.findAllByStatus(Status.valueOf("APPROVED")).stream().map(post -> PostResponse.builder()
                 .reviewId(post.getReviewId())
                 .title(post.getTitle())
                 .content(post.getContent())

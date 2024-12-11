@@ -22,6 +22,16 @@ public class PostController {
         return new ResponseEntity<>(postService.getPosts(), HttpStatus.OK);
     }
 
+    @GetMapping("/draft")
+    public ResponseEntity<List<PostResponse>> getDraftPosts() {
+        return new ResponseEntity<>(postService.getDraftPosts(), HttpStatus.OK);
+    }
+
+    @GetMapping("/approved")
+    public ResponseEntity<List<PostResponse>> getApprovedPosts() {
+        return new ResponseEntity<>(postService.getApprovedPosts(), HttpStatus.OK);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest postRequest) {

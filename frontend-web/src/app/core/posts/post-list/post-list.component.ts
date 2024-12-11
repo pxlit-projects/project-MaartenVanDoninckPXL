@@ -19,7 +19,7 @@ export class PostListComponent implements OnInit {
   posts: Post[] = [];
 
   ngOnInit() {
-    this.postService.getPosts().subscribe((data: Post[]) => {
+    this.postService.getApprovedPosts().subscribe((data: Post[]) => {
       this.posts = data;
     });
   }
