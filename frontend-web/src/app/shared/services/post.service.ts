@@ -24,6 +24,12 @@ export class PostService {
     );
   }
 
+  getPostsInDraftByAuthor(author: string): Observable<Post[]> {
+    return this.http.get<Post[]>(this.api + '/draft/' + author).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getApprovedPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.api + '/approved').pipe(
       catchError(this.handleError)

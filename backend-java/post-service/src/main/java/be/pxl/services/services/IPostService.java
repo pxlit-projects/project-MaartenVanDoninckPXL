@@ -9,5 +9,6 @@ public interface IPostService {
     List<PostResponse> getPosts();
     List<PostResponse> getDraftPosts();
     List<PostResponse> getApprovedPosts();
+    List<PostResponse> getDraftPostsByAuthor(String author);
     PostResponse createPost(PostRequest postRequest);
 }

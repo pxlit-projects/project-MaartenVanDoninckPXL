@@ -48,6 +48,17 @@ public class PostService implements IPostService {
                 .build()).toList();
     }
 
+    @Override
+    public List<PostResponse> getDraftPostsByAuthor(String author) {
+        return postRepository.findAllByStatusAndAuthor(Status.valueOf("DRAFT"), author).stream().map(post -> PostResponse.builder()
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .build()).toList();
+    }
+
     public PostResponse createPost(PostRequest postRequest) {
         Post post = Post.builder()
                 .reviewId(postRequest.getReviewId())

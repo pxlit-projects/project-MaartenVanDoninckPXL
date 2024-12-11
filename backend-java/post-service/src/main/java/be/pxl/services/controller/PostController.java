@@ -27,6 +27,11 @@ public class PostController {
         return new ResponseEntity<>(postService.getDraftPosts(), HttpStatus.OK);
     }
 
+    @GetMapping("/draft/{author}")
+    public ResponseEntity<List<PostResponse>> getDraftPostsByAuthor(@PathVariable String author) {
+        return new ResponseEntity<>(postService.getDraftPostsByAuthor(author), HttpStatus.OK);
+    }
+
     @GetMapping("/approved")
     public ResponseEntity<List<PostResponse>> getApprovedPosts() {
         return new ResponseEntity<>(postService.getApprovedPosts(), HttpStatus.OK);
