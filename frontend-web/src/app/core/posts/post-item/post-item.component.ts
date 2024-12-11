@@ -1,6 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
-import {Post} from "../../../shared/models/post.model";
+import { Component, Input } from '@angular/core';
+import { Post } from "../../../shared/models/post.model";
 
 @Component({
   selector: 'app-post-item',

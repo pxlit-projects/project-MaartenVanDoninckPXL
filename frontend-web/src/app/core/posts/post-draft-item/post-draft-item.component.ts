@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Post } from '../../../shared/models/post.model';
 
 @Component({
   selector: 'app-post-draft-item',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './post-draft-item.component.css'
 })
 export class PostDraftItemComponent {
-
+  @Input() post!: Post;
 }
