@@ -19,6 +19,7 @@ export class EditPostComponent implements OnInit {
 
   postForm = this.fb.group({
     id: [{ value: 0, disabled: true }],
+    reviewId: [0],
     title: ['', Validators.required],
     content: ['', Validators.required],
     author: ['', Validators.required],
@@ -27,9 +28,11 @@ export class EditPostComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('Route ID:', id);
     if (id) {
       this.postService.getPostById(id).subscribe({
         next: (post) => {
+          console.log('Fetched post:', post);
           this.postForm.patchValue(post);
         },
         error: (error) => {
@@ -44,7 +47,16 @@ export class EditPostComponent implements OnInit {
 
   onSubmit(): void {
     if (this.postForm.valid) {
-      const updatedPost = this.postForm.getRawValue() as Post;
+      const formValue = this.postForm.getRawValue();
+      const updatedPost = new Post(
+        formValue.id ?? 0,
+        formValue.reviewId ?? 0,
+        formValue.title ?? '',
+        formValue.content ?? '',
+        formValue.author ?? '',
+        formValue.status ?? ''
+      );
+      console.log('Updating post:', updatedPost);
       this.postService.updatePost(updatedPost).subscribe({
         next: () => {
           this.router.navigate(['/draft']);
