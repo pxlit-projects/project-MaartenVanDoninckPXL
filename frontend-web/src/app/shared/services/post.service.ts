@@ -12,6 +12,12 @@ export class PostService {
   api: string = environment.apiUrl + '/post/api/posts';
   http: HttpClient = inject(HttpClient);
 
+  addPost(post: Post): Observable<Post> {
+    return this.http.post<Post>(this.api, post).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.api).pipe(
       catchError(this.handleError)
@@ -36,8 +42,14 @@ export class PostService {
     );
   }
 
-  addPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(this.api, post).pipe(
+  getPostById(id: number): Observable<Post> {
+    return this.http.get<Post>(this.api + '/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updatePost(post: Post): Observable<Post> {
+    return this.http.put<Post>(this.api + '/' + post.id, post).pipe(
       catchError(this.handleError)
     );
   }

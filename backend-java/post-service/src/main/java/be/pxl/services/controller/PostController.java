@@ -17,6 +17,13 @@ public class PostController {
 
     private final IPostService postService;
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest postRequest) {
+        PostResponse createdPost = postService.createPost(postRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
+    }
+
     @GetMapping
     public ResponseEntity<List<PostResponse>> getPosts() {
         return new ResponseEntity<>(postService.getPosts(), HttpStatus.OK);
@@ -37,10 +44,14 @@ public class PostController {
         return new ResponseEntity<>(postService.getApprovedPosts(), HttpStatus.OK);
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest postRequest) {
-        PostResponse createdPost = postService.createPost(postRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
+    @GetMapping("/{id}")
+    public ResponseEntity<PostResponse> getPostById(@PathVariable Long id) {
+        return new ResponseEntity<>(postService.getPostById(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PostResponse> updatePost(@PathVariable Long id, @RequestBody PostRequest postRequest) {
+        PostResponse updatedPost = postService.updatePost(id, postRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedPost);
     }
 }

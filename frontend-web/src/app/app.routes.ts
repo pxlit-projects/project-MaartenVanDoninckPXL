@@ -3,11 +3,19 @@ import { PostListComponent } from "./core/posts/post-list/post-list.component";
 import { AddPostComponent } from "./core/posts/add-post/add-post.component";
 import { PostDraftListComponent } from './core/posts/post-draft-list/post-draft-list.component';
 import { LoginComponent } from './core/auth/login/login.component';
+import { EditPostComponent } from './core/posts/edit-post/edit-post.component';
+import { AuthGuard } from './core/auth/auth-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'posts', pathMatch: 'full' },
   { path: 'posts', component: PostListComponent },
   { path: 'add', component: AddPostComponent },
   { path: 'draft', component: PostDraftListComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'edit/:id',
+    component: EditPostComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['redacteur', 'hoofdredacteur'] }
+  }
 ];

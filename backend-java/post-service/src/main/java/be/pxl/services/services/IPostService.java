@@ -6,9 +6,11 @@ import be.pxl.services.domain.dto.PostResponse;
 import java.util.List;
 
 public interface IPostService {
+    PostResponse createPost(PostRequest postRequest);
     List<PostResponse> getPosts();
     List<PostResponse> getDraftPosts();
     List<PostResponse> getApprovedPosts();
     List<PostResponse> getDraftPostsByAuthor(String author);
-    PostResponse createPost(PostRequest postRequest);
+    PostResponse getPostById(Long id);
+    PostResponse updatePost(Long id, PostRequest postRequest);
 }
