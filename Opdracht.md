@@ -26,8 +26,10 @@
   * **Completed**
 * **US3:** Als ``redacteur`` wil ik de inhoud van een ``post`` kunnen bewerken, zodat ik fouten kan corrigeren en inhoud kan bijwerken.
   * Een redacteur moet bestaande artikelen kunnen aanpassen om fouten te corrigeren of nieuwe informatie toe te voegen.
+  * **Completed**
 * **US4:** Als ``gebruiker`` wil ik een overzicht van gepubliceerde ``posts`` kunnen zien, zodat ik op de hoogte blijf van het laatste nieuws.
   * Gebruikers moeten een lijst kunnen zien van alle gepubliceerde artikelen.
+  * **Completed**
 * **US5:** Als ``gebruiker`` wil ik ``posts`` kunnen filteren op basis van inhoud, auteur & categorie.
   * Gebruikers moeten artikelen kunnen filteren op specifieke criteria zoals inhoud, auteur en categorie.
 
