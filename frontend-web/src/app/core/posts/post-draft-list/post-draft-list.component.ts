@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { FilterComponent } from "../filter/filter.component";
-import { PostItemComponent } from "../post-item/post-item.component";
 import { PostService } from '../../../shared/services/post.service';
 import { Post } from '../../../shared/models/post.model';
 import { PostDraftItemComponent } from "../post-draft-item/post-draft-item.component";

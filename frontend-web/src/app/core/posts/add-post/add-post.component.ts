@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {PostService} from "../../../shared/services/post.service";
 import {Post} from "../../../shared/models/post.model";
 import {Router} from "@angular/router";
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-add-post',
@@ -13,14 +14,15 @@ import {Router} from "@angular/router";
 })
 export class AddPostComponent {
   postService: PostService = inject(PostService);
+  authService: AuthService = inject(AuthService);
   router: Router = inject(Router);
 
   fb: FormBuilder = inject(FormBuilder);
   postForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
     content: ['', Validators.required],
-    author: ['', Validators.required],
-    status: ['PENDING', Validators.required]
+    author: [this.authService.getUser()!.userName, Validators.required],
+    status: ['DRAFT', Validators.required]
   });
 
   errorMessage: string | null = null;
