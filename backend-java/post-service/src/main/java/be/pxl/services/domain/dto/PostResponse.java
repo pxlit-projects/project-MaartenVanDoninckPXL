@@ -1,5 +1,6 @@
 package be.pxl.services.domain.dto;
 
+import be.pxl.services.domain.Category;
 import be.pxl.services.domain.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,5 @@ public class PostResponse {
     private String content;
     private String author;
     private Status status;
+    private Category category;
 }

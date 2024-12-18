@@ -1,1 +1,16 @@
-<p>filter works!</p>
+<div class="w-full bg-white rounded-xl overflow-hidden shadow-md">
+    <div class="p-6">
+        <div class="flex space-x-4">
+            <input type="text" placeholder="Title" [(ngModel)]="title" (input)="onFilterChange()"
+                class="flex-1 px-3 py-2 border rounded-md" />
+            <input type="text" placeholder="Author" [(ngModel)]="author" (input)="onFilterChange()"
+                class="flex-1 px-3 py-2 border rounded-md" />
+            <select [(ngModel)]="category" (change)="onFilterChange()" class="flex-1 px-3 py-2 border rounded-md">
+                <option value="">All Categories</option>
+                @for (category of categories; track category) {
+                <option [value]="category">{{ category }}</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>

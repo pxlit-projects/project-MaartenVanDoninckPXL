@@ -23,6 +23,7 @@ public class PostService implements IPostService {
                 .content(postRequest.getContent())
                 .author(postRequest.getAuthor())
                 .status(postRequest.getStatus())
+                .category(postRequest.getCategory())
                 .build();
         postRepository.save(post);
         return PostResponse.builder()
@@ -32,6 +33,7 @@ public class PostService implements IPostService {
                 .content(post.getContent())
                 .author(post.getAuthor())
                 .status(post.getStatus())
+                .category(post.getCategory())
                 .build();
     }
 
@@ -43,6 +45,7 @@ public class PostService implements IPostService {
                 .content(post.getContent())
                 .author(post.getAuthor())
                 .status(post.getStatus())
+                .category(post.getCategory())
                 .build()).toList();
     }
 
@@ -55,6 +58,7 @@ public class PostService implements IPostService {
                 .content(post.getContent())
                 .author(post.getAuthor())
                 .status(post.getStatus())
+                .category(post.getCategory())
                 .build()).toList();
     }
 
@@ -67,6 +71,7 @@ public class PostService implements IPostService {
                 .content(post.getContent())
                 .author(post.getAuthor())
                 .status(post.getStatus())
+                .category(post.getCategory())
                 .build()).toList();
     }
 
@@ -79,6 +84,7 @@ public class PostService implements IPostService {
                 .content(post.getContent())
                 .author(post.getAuthor())
                 .status(post.getStatus())
+                .category(post.getCategory())
                 .build()).toList();
     }
 
@@ -92,6 +98,7 @@ public class PostService implements IPostService {
                 .content(post.getContent())
                 .author(post.getAuthor())
                 .status(post.getStatus())
+                .category(post.getCategory())
                 .build();
     }
 
@@ -103,13 +110,16 @@ public class PostService implements IPostService {
         post.setContent(postRequest.getContent());
         post.setAuthor(postRequest.getAuthor());
         post.setStatus(postRequest.getStatus());
+        post.setCategory(postRequest.getCategory());
         postRepository.save(post);
         return PostResponse.builder()
+                .id(post.getId())
                 .reviewId(post.getReviewId())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .author(post.getAuthor())
                 .status(post.getStatus())
+                .category(post.getCategory())
                 .build();
     }
 }

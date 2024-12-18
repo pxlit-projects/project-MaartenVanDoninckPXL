@@ -10,22 +10,36 @@ import { AuthService } from '../../../shared/services/auth.service';
   standalone: true,
   imports: [FilterComponent, PostDraftItemComponent],
   templateUrl: './post-draft-list.component.html',
-  styleUrl: './post-draft-list.component.css'
+  styleUrls: ['./post-draft-list.component.css']
 })
 export class PostDraftListComponent {
   postService: PostService = inject(PostService);
   authService: AuthService = inject(AuthService);
   posts: Post[] = [];
+  filteredPosts: Post[] = [];
 
   ngOnInit() {
     if (this.authService.hasRole('hoofdredacteur')) {
       this.postService.getPostsInDraft().subscribe((data: Post[]) => {
         this.posts = data;
+        this.filteredPosts = data;
       });
     } else {
       this.postService.getPostsInDraftByAuthor(this.authService.getUser()!.userName).subscribe((data: Post[]) => {
         this.posts = data;
+        this.filteredPosts = data;
       });
     }
+  }
+
+  onFilterChange(filterCriteria: any) {
+    this.filteredPosts = this.posts.filter(post => {
+      const matchesTitle = post.title.includes(filterCriteria.title);
+      const matchesAuthor = post.author.includes(filterCriteria.author);
+      const matchesCategory =
+        !filterCriteria.category || post.category === filterCriteria.category;
+
+      return matchesTitle && matchesAuthor && matchesCategory;
+    });
   }
 }

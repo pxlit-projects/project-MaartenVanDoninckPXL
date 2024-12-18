@@ -32,6 +32,7 @@
   * **Completed**
 * **US5:** Als ``gebruiker`` wil ik ``posts`` kunnen filteren op basis van inhoud, auteur & categorie.
   * Gebruikers moeten artikelen kunnen filteren op specifieke criteria zoals inhoud, auteur en categorie.
+  * **Completed**
 
 ### ReviewService
 

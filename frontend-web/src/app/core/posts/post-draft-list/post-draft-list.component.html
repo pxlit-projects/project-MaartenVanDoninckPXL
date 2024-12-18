@@ -1,7 +1,7 @@
-<app-filter></app-filter>
+<app-filter (filterChanged)="onFilterChange($event)"></app-filter>
 <div class="md:container md:mx-auto container mx-auto mt-10">
     <div class="grid grid-cols-3 gap-6">
-        @for (post of posts; track post.title) {
+        @for (post of filteredPosts; track post.id) {
         <app-post-draft-item [post]="post"></app-post-draft-item>
         }
     </div>

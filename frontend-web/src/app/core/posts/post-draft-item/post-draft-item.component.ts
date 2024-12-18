@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { Post } from '../../../shared/models/post.model';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-post-draft-item',

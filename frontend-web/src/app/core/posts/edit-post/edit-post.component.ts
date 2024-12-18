@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PostService } from '../../../shared/services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Post } from '../../../shared/models/post.model';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Post, Category } from '../../../shared/models/post.model';
 
 @Component({
   selector: 'app-edit-post',
@@ -17,13 +17,16 @@ export class EditPostComponent implements OnInit {
   router: Router = inject(Router);
   fb: FormBuilder = inject(FormBuilder);
 
+  categories = Object.values(Category);
+
   postForm = this.fb.group({
     id: [{ value: 0, disabled: true }],
     reviewId: [0],
     title: ['', Validators.required],
     content: ['', Validators.required],
     author: ['', Validators.required],
-    status: ['', Validators.required]
+    status: ['', Validators.required],
+    category: ['', Validators.required]
   });
 
   ngOnInit(): void {
@@ -54,7 +57,8 @@ export class EditPostComponent implements OnInit {
         formValue.title ?? '',
         formValue.content ?? '',
         formValue.author ?? '',
-        formValue.status ?? ''
+        formValue.status ?? '',
+        formValue.category as Category ?? ''
       );
       console.log('Updating post:', updatedPost);
       this.postService.updatePost(updatedPost).subscribe({
