@@ -6,13 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReviewResponse implements Serializable {
+public class ReviewRequest {
 
     private Long postId;
     private Long reviewId;

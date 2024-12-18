@@ -4,6 +4,7 @@ import be.pxl.services.domain.Post;
 import be.pxl.services.domain.Status;
 import be.pxl.services.domain.dto.PostRequest;
 import be.pxl.services.domain.dto.PostResponse;
+import be.pxl.services.domain.dto.ReviewRequest;
 import be.pxl.services.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -121,5 +122,12 @@ public class PostService implements IPostService {
                 .status(post.getStatus())
                 .category(post.getCategory())
                 .build();
+    }
+
+    @Override
+    public void updatePostWithReview(ReviewRequest reviewRequest) {
+        Post post = postRepository.findById(reviewRequest.getPostId()).orElseThrow();
+        post.setReviewId(reviewRequest.getPostId());
+        postRepository.save(post);
     }
 }

@@ -20,5 +20,5 @@ public class Review {
 
     private Long postId;
     private String author;
-    private String content;
+    private Approval approval;
 }

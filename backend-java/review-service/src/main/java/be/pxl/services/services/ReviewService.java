@@ -5,6 +5,7 @@ import be.pxl.services.domain.dto.ReviewRequest;
 import be.pxl.services.domain.dto.ReviewResponse;
 import be.pxl.services.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +15,13 @@ import java.util.List;
 public class ReviewService implements IReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final RabbitTemplate rabbitTemplate;
 
     public List<ReviewResponse> getReviews() {
         return reviewRepository.findAll().stream().map(review -> ReviewResponse.builder()
                 .postId(review.getPostId())
-                .author(review.getAuthor())
-                .content(review.getContent())
+                .postId(review.getId())
+                .approval(review.getApproval())
                 .build()).toList();
     }
 
@@ -27,8 +29,16 @@ public class ReviewService implements IReviewService {
         Review review = Review.builder()
                 .postId(reviewRequest.getPostId())
                 .author(reviewRequest.getAuthor())
-                .content(reviewRequest.getContent())
+                .approval(reviewRequest.getApproval())
                 .build();
         reviewRepository.save(review);
+
+        ReviewResponse reviewResponse = ReviewResponse.builder()
+                .postId(review.getPostId())
+                .reviewId(review.getId())
+                .approval(review.getApproval())
+                .build();
+
+        rabbitTemplate.convertAndSend("post-service-queue", reviewResponse);
     }
 }
