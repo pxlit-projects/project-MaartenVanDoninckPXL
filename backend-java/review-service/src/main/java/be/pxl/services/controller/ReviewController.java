@@ -23,8 +23,12 @@ public class ReviewController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createReview(@RequestBody ReviewRequest reviewRequest) {
-        reviewService.createReview(reviewRequest);
+    public ResponseEntity<?> createReview(@RequestBody ReviewRequest reviewRequest) {
+        try {
+            reviewService.createReview(reviewRequest);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

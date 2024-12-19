@@ -1,6 +1,5 @@
 package be.pxl.services.domain.dto;
 
-import be.pxl.services.domain.Approval;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +15,5 @@ public class ReviewResponse implements Serializable {
 
     private Long postId;
     private Long reviewId;
-    private Approval approval;
+    boolean approval;
 }

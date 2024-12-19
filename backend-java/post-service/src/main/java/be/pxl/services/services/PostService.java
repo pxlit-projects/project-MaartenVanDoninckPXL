@@ -128,6 +128,11 @@ public class PostService implements IPostService {
     public void updatePostWithReview(ReviewRequest reviewRequest) {
         Post post = postRepository.findById(reviewRequest.getPostId()).orElseThrow();
         post.setReviewId(reviewRequest.getPostId());
+        if (reviewRequest.isApproval()) {
+            post.setStatus(Status.valueOf("APPROVED"));
+        } else {
+            post.setStatus(Status.valueOf("REJECTED"));
+        }
         postRepository.save(post);
     }
 }

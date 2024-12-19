@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,22 +22,26 @@ public class ReviewService implements IReviewService {
         return reviewRepository.findAll().stream().map(review -> ReviewResponse.builder()
                 .postId(review.getPostId())
                 .postId(review.getId())
-                .approval(review.getApproval())
+                .approval(review.isApproval())
                 .build()).toList();
     }
 
     public void createReview(ReviewRequest reviewRequest) {
+        Optional<Review> reviewOptional = reviewRepository.findReviewsByPostId(reviewRequest.getPostId());
+        if (reviewOptional.isPresent()) {
+            throw new IllegalArgumentException("Review already exists for post with id " + reviewRequest.getPostId());
+        }
         Review review = Review.builder()
                 .postId(reviewRequest.getPostId())
                 .author(reviewRequest.getAuthor())
-                .approval(reviewRequest.getApproval())
+                .approval(reviewRequest.isApproval())
                 .build();
         reviewRepository.save(review);
 
         ReviewResponse reviewResponse = ReviewResponse.builder()
                 .postId(review.getPostId())
                 .reviewId(review.getId())
-                .approval(review.getApproval())
+                .approval(review.isApproval())
                 .build();
 
         rabbitTemplate.convertAndSend("post-service-queue", reviewResponse);
