@@ -39,6 +39,16 @@ public class PostController {
         return new ResponseEntity<>(postService.getDraftPostsByAuthor(author), HttpStatus.OK);
     }
 
+    @GetMapping("/pending")
+    public ResponseEntity<List<PostResponse>> getPendingPosts() {
+        return new ResponseEntity<>(postService.getPendingPosts(), HttpStatus.OK);
+    }
+
+    @GetMapping("/pending/{author}")
+    public ResponseEntity<List<PostResponse>> getPendingPostsByAuthor(@PathVariable String author) {
+        return new ResponseEntity<>(postService.getPendingPostsByAuthor(author), HttpStatus.OK);
+    }
+
     @GetMapping("/approved")
     public ResponseEntity<List<PostResponse>> getApprovedPosts() {
         return new ResponseEntity<>(postService.getApprovedPosts(), HttpStatus.OK);
@@ -53,5 +63,17 @@ public class PostController {
     public ResponseEntity<PostResponse> updatePost(@PathVariable Long id, @RequestBody PostRequest postRequest) {
         PostResponse updatedPost = postService.updatePost(id, postRequest);
         return ResponseEntity.status(HttpStatus.OK).body(updatedPost);
+    }
+
+    @PatchMapping("approve/{id}")
+    public ResponseEntity<PostResponse> approvePost(@PathVariable Long id) {
+        PostResponse approvedPost = postService.approvePost(id);
+        return ResponseEntity.status(HttpStatus.OK).body(approvedPost);
+    }
+
+    @PatchMapping("reject/{id}")
+    public ResponseEntity<PostResponse> rejectPost(@PathVariable Long id) {
+        PostResponse rejectedPost = postService.rejectPost(id);
+        return ResponseEntity.status(HttpStatus.OK).body(rejectedPost);
     }
 }

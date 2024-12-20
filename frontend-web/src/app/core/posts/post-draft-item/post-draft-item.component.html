@@ -6,7 +6,10 @@
             {{ post.content }}
         </p>
         <div class="flex justify-between items-center mt-6">
-            <p class="font-bold text-sm">{{ post.category }}</p>
+            <div>
+                <p class="font-bold text-sm">{{ post.category }}</p>
+                <p class="text-gray-500">{{post.status}}</p>
+            </div>
             <a [routerLink]="['/edit', post.id]"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded cursor-pointer">
                 Edit

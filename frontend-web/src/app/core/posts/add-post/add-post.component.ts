@@ -30,11 +30,12 @@ export class AddPostComponent {
 
   errorMessage: string | null = null;
 
-  onSubmit() {
+  onSubmitForReview() {
     this.errorMessage = null;
     if (this.postForm.valid) {
       const newPost: Post = {
-        ...this.postForm.value
+        ...this.postForm.value,
+        status: 'PENDING'
       };
       this.postService.addPost(newPost).subscribe({
         next: () => {

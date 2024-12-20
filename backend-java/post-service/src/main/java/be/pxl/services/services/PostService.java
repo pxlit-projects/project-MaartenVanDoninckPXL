@@ -90,6 +90,32 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public List<PostResponse> getPendingPosts() {
+        return postRepository.findAllByStatus(Status.valueOf("PENDING")).stream().map(post -> PostResponse.builder()
+                .id(post.getId())
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .category(post.getCategory())
+                .build()).toList();
+    }
+
+    @Override
+    public List<PostResponse> getPendingPostsByAuthor(String author) {
+        return postRepository.findAllByStatusAndAuthor(Status.valueOf("PENDING"), author).stream().map(post -> PostResponse.builder()
+                .id(post.getId())
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .category(post.getCategory())
+                .build()).toList();
+    }
+
+    @Override
     public PostResponse getPostById(Long id) {
         Post post = postRepository.findById(id).orElseThrow();
         return PostResponse.builder()
@@ -134,5 +160,37 @@ public class PostService implements IPostService {
             post.setStatus(Status.valueOf("REJECTED"));
         }
         postRepository.save(post);
+    }
+
+    @Override
+    public PostResponse approvePost(Long id) {
+        Post post = postRepository.findById(id).orElseThrow();
+        post.setStatus(Status.valueOf("APPROVED"));
+        postRepository.save(post);
+        return PostResponse.builder()
+                .id(post.getId())
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .category(post.getCategory())
+                .build();
+    }
+
+    @Override
+    public PostResponse rejectPost(Long id) {
+        Post post = postRepository.findById(id).orElseThrow();
+        post.setStatus(Status.valueOf("REJECTED"));
+        postRepository.save(post);
+        return PostResponse.builder()
+                .id(post.getId())
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .category(post.getCategory())
+                .build();
     }
 }

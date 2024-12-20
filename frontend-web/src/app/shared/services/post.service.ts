@@ -36,6 +36,18 @@ export class PostService {
     );
   }
 
+  getPendingPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.api + '/pending').pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getPendingPostsByAuthor(author: string): Observable<Post[]> {
+    return this.http.get<Post[]>(this.api + '/pending/' + author).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getApprovedPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.api + '/approved').pipe(
       catchError(this.handleError)
@@ -50,6 +62,18 @@ export class PostService {
 
   updatePost(post: Post): Observable<Post> {
     return this.http.put<Post>(this.api + '/' + post.id, post).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  approvePost(id: number): Observable<Post> {
+    return this.http.patch<Post>(this.api + '/approve/' + id, {}).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  rejectPost(id: number): Observable<Post> {
+    return this.http.patch<Post>(this.api + '/reject/' + id, {}).pipe(
       catchError(this.handleError)
     );
   }

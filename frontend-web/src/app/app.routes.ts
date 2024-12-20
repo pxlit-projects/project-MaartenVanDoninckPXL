@@ -5,12 +5,14 @@ import { PostDraftListComponent } from './core/posts/post-draft-list/post-draft-
 import { LoginComponent } from './core/auth/login/login.component';
 import { EditPostComponent } from './core/posts/edit-post/edit-post.component';
 import { AuthGuard } from './core/auth/auth-guard';
+import { PostPendingListComponent } from './core/posts/post-pending-list/post-pending-list.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'posts', pathMatch: 'full' },
   { path: 'posts', component: PostListComponent },
-  { path: 'add', component: AddPostComponent },
+  { path: 'pending', component: PostPendingListComponent },
   { path: 'draft', component: PostDraftListComponent },
+  { path: 'add', component: AddPostComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'edit/:id',

@@ -1,6 +1,6 @@
 <div class="container mx-auto mt-5">
   <h2 class="text-xl mb-3">Add Post</h2>
-  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="postForm">
     <div class="mb-4">
       <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
       <input type="text" id="title" formControlName="title"
@@ -29,10 +29,14 @@
       <div class="text-red-500 text-sm mt-1">Category is required</div>
       }
     </div>
-    <div class="mb-4">
+    <div class="mb-4 flex space-x-4">
       <button type="button" (click)="onDraft()"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        Draft Post
+        Draft
+      </button>
+      <button type="button" (click)="onSubmitForReview()"
+        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Submit for Review
       </button>
     </div>
     @if (errorMessage) {

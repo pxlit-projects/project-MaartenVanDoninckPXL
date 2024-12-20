@@ -25,7 +25,7 @@ export class EditPostComponent implements OnInit {
     title: ['', Validators.required],
     content: ['', Validators.required],
     author: ['', Validators.required],
-    status: ['', Validators.required],
+    status: [{ value: '', disabled: true }],
     category: ['', Validators.required]
   });
 
@@ -48,7 +48,7 @@ export class EditPostComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
+  onUpdate(): void {
     if (this.postForm.valid) {
       const formValue = this.postForm.getRawValue();
       const updatedPost = new Post(
@@ -60,7 +60,29 @@ export class EditPostComponent implements OnInit {
         formValue.status ?? '',
         formValue.category as Category ?? ''
       );
-      console.log('Updating post:', updatedPost);
+      this.postService.updatePost(updatedPost).subscribe({
+        next: () => {
+          this.router.navigate(['/draft']);
+        },
+        error: (error) => {
+          console.error('Error updating post:', error);
+        }
+      });
+    }
+  }
+
+  onSubmitForReview(): void {
+    if (this.postForm.valid) {
+      const formValue = this.postForm.getRawValue();
+      const updatedPost = new Post(
+        formValue.id ?? 0,
+        formValue.reviewId ?? 0,
+        formValue.title ?? '',
+        formValue.content ?? '',
+        formValue.author ?? '',
+        'PENDING',
+        formValue.category as Category ?? ''
+      );
       this.postService.updatePost(updatedPost).subscribe({
         next: () => {
           this.router.navigate(['/draft']);

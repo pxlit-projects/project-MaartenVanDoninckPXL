@@ -38,6 +38,7 @@
 
 * **US6:** Als ``hoofdredacteur`` wil ik ``ingediende posts`` kunnen bekijken en goedkeuren of afwijzen, zodat alleen goedgekeurde content wordt gepubliceerd.
   * Hoofdredacteuren moeten ingediende artikelen kunnen beoordelen en beslissen of ze worden gepubliceerd of afgewezen.
+  * **Completed**
 * **US7:** Als ``redacteur`` wil ik een ``melding`` ontvangen wanneer een ``post`` goedgekeurd of afgewezen is, zodat ik weet of het gepubliceerd kan worden of moet worden herzien.
   * Redacteuren moeten notificaties ontvangen over de status van hun ingediende artikelen.
 * **US8:** Als ``redacteur`` wil ik opmerkingen kunnen toevoegen bij afwijzing van een ``post``, zodat de ``redacteur`` weet welke wijzigingen er nodig zijn.
