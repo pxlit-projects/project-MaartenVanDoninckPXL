@@ -48,12 +48,6 @@ export class PostService {
     );
   }
 
-  getApprovedPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.api + '/approved').pipe(
-      catchError(this.handleError)
-    );
-  }
-
   getPostedPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.api + '/posted').pipe(
       catchError(this.handleError)
@@ -62,6 +56,12 @@ export class PostService {
 
   getPostById(id: number): Observable<Post> {
     return this.http.get<Post>(this.api + '/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAmountOfReviewedPostsByAuthor(author: string): Observable<number> {
+    return this.http.get<number>(this.api + '/reviewed/' + author).pipe(
       catchError(this.handleError)
     );
   }

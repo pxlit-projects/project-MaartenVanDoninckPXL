@@ -129,6 +129,11 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public int getAmountOfReviewedPostsByAuthor(String author) {
+        return postRepository.findAllByStatusInAndAuthor(List.of(Status.valueOf("APPROVED"), Status.valueOf("REJECTED")), author).size();
+    }
+
+    @Override
     public PostResponse getPostById(Long id) {
         Post post = postRepository.findById(id).orElseThrow();
         return PostResponse.builder()
@@ -173,38 +178,6 @@ public class PostService implements IPostService {
             post.setStatus(Status.valueOf("REJECTED"));
         }
         postRepository.save(post);
-    }
-
-    @Override
-    public PostResponse approvePost(Long id) {
-        Post post = postRepository.findById(id).orElseThrow();
-        post.setStatus(Status.valueOf("APPROVED"));
-        postRepository.save(post);
-        return PostResponse.builder()
-                .id(post.getId())
-                .reviewId(post.getReviewId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .author(post.getAuthor())
-                .status(post.getStatus())
-                .category(post.getCategory())
-                .build();
-    }
-
-    @Override
-    public PostResponse rejectPost(Long id) {
-        Post post = postRepository.findById(id).orElseThrow();
-        post.setStatus(Status.valueOf("REJECTED"));
-        postRepository.save(post);
-        return PostResponse.builder()
-                .id(post.getId())
-                .reviewId(post.getReviewId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .author(post.getAuthor())
-                .status(post.getStatus())
-                .category(post.getCategory())
-                .build();
     }
 
     @Override

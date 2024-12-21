@@ -1,0 +1,5 @@
+.active-link {
+    font-weight: bolder;
+    font-size: 1.1rem;
+    transition: font-size 0.3s ease, font-weight 0.3s ease;
+}

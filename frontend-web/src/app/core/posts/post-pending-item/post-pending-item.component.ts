@@ -6,6 +6,7 @@ import { PostService } from '../../../shared/services/post.service';
 import { ReviewService } from '../../../shared/services/review.service';
 import { Review } from '../../../shared/models/review.model';
 import { delay } from 'rxjs';
+import { NotificationService } from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-post-pending-item',
@@ -19,6 +20,8 @@ export class PostPendingItemComponent {
   postService: PostService = inject(PostService);
   reviewService: ReviewService = inject(ReviewService);
   authService: AuthService = inject(AuthService);
+  notificationService: NotificationService = inject(NotificationService);
+
   @Input() post!: Post;
   @Output() statusChanged = new EventEmitter<void>();
 
@@ -35,6 +38,7 @@ export class PostPendingItemComponent {
     ).subscribe({
       next: () => {
         this.statusChanged.emit();
+        this.notificationService.notifyReviewUpdate();
       },
       error: (error) => {
         console.error('Error creating review:', error);
@@ -55,6 +59,7 @@ export class PostPendingItemComponent {
     ).subscribe({
       next: () => {
         this.statusChanged.emit();
+        this.notificationService.notifyReviewUpdate();
       },
       error: (error) => {
         console.error('Error creating review:', error);
@@ -66,6 +71,7 @@ export class PostPendingItemComponent {
     this.postService.submitPost(this.post.id).subscribe({
       next: () => {
         this.statusChanged.emit();
+        this.notificationService.notifyReviewUpdate();
       },
       error: (error) => {
         console.error('Error updating post:', error);

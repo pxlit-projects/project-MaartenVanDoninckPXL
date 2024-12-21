@@ -64,22 +64,15 @@ public class PostController {
         return new ResponseEntity<>(postService.getPostById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/reviewed/{author}")
+    public ResponseEntity<?> getAmountOfReviewedPostsByAuthor(@PathVariable String author) {
+        return new ResponseEntity<>(postService.getAmountOfReviewedPostsByAuthor(author), HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<PostResponse> updatePost(@PathVariable Long id, @RequestBody PostRequest postRequest) {
         PostResponse updatedPost = postService.updatePost(id, postRequest);
         return ResponseEntity.status(HttpStatus.OK).body(updatedPost);
-    }
-
-    @PatchMapping("approve/{id}")
-    public ResponseEntity<PostResponse> approvePost(@PathVariable Long id) {
-        PostResponse approvedPost = postService.approvePost(id);
-        return ResponseEntity.status(HttpStatus.OK).body(approvedPost);
-    }
-
-    @PatchMapping("reject/{id}")
-    public ResponseEntity<PostResponse> rejectPost(@PathVariable Long id) {
-        PostResponse rejectedPost = postService.rejectPost(id);
-        return ResponseEntity.status(HttpStatus.OK).body(rejectedPost);
     }
 
     @PatchMapping("submit/{id}")

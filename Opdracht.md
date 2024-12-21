@@ -41,6 +41,7 @@
   * **Completed**
 * **US7:** Als ``redacteur`` wil ik een ``melding`` ontvangen wanneer een ``post`` goedgekeurd of afgewezen is, zodat ik weet of het gepubliceerd kan worden of moet worden herzien.
   * Redacteuren moeten notificaties ontvangen over de status van hun ingediende artikelen.
+  * **Completed**
 * **US8:** Als ``redacteur`` wil ik opmerkingen kunnen toevoegen bij afwijzing van een ``post``, zodat de ``redacteur`` weet welke wijzigingen er nodig zijn.
   * Redacteuren moeten feedback kunnen geven bij het afwijzen van een artikel, zodat de auteur weet wat er moet worden aangepast.
 

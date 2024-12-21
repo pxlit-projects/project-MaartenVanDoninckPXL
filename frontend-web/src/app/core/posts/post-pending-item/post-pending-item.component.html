@@ -10,7 +10,7 @@
                 <p class="font-bold text-sm">{{ post.category }}</p>
                 <p class="text-gray-500">{{post.status}}</p>
             </div>
-            @if (post.status === 'APPROVED') {
+            @if (post.status === 'APPROVED' && authService.getUser()?.userName === post.author) {
             <button type="button" (click)="submitPost()"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Post
