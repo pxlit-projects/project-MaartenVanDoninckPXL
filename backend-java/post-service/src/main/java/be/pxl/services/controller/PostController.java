@@ -54,6 +54,11 @@ public class PostController {
         return new ResponseEntity<>(postService.getApprovedPosts(), HttpStatus.OK);
     }
 
+    @GetMapping("/posted")
+    public ResponseEntity<List<PostResponse>> getPostedPosts() {
+        return new ResponseEntity<>(postService.getPostedPosts(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PostResponse> getPostById(@PathVariable Long id) {
         return new ResponseEntity<>(postService.getPostById(id), HttpStatus.OK);
@@ -75,5 +80,11 @@ public class PostController {
     public ResponseEntity<PostResponse> rejectPost(@PathVariable Long id) {
         PostResponse rejectedPost = postService.rejectPost(id);
         return ResponseEntity.status(HttpStatus.OK).body(rejectedPost);
+    }
+
+    @PatchMapping("submit/{id}")
+    public ResponseEntity<PostResponse> submitPost(@PathVariable Long id) {
+        PostResponse submittedPost = postService.submitPost(id);
+        return ResponseEntity.status(HttpStatus.OK).body(submittedPost);
     }
 }

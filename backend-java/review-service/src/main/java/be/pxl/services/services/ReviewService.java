@@ -35,6 +35,7 @@ public class ReviewService implements IReviewService {
                 .postId(reviewRequest.getPostId())
                 .author(reviewRequest.getAuthor())
                 .approval(reviewRequest.isApproval())
+                .content(reviewRequest.getContent())
                 .build();
         reviewRepository.save(review);
 
@@ -42,6 +43,8 @@ public class ReviewService implements IReviewService {
                 .postId(review.getPostId())
                 .reviewId(review.getId())
                 .approval(review.isApproval())
+                .author(review.getAuthor())
+                .content(review.getContent())
                 .build();
 
         rabbitTemplate.convertAndSend("post-service-queue", reviewResponse);

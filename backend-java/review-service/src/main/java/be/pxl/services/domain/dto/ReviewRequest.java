@@ -14,4 +14,5 @@ public class ReviewRequest {
     private Long postId;
     private String author;
     private boolean approval;
+    private String content;
 }

@@ -16,4 +16,6 @@ public class ReviewResponse implements Serializable {
     private Long postId;
     private Long reviewId;
     boolean approval;
+    private String author;
+    private String content;
 }

@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Post } from '../../../shared/models/post.model';
 import { AuthService } from '../../../shared/services/auth.service';
 import { PostService } from '../../../shared/services/post.service';
+import { ReviewService } from '../../../shared/services/review.service';
+import { Review } from '../../../shared/models/review.model';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-post-pending-item',
@@ -14,23 +17,53 @@ import { PostService } from '../../../shared/services/post.service';
 export class PostPendingItemComponent {
   router: Router = inject(Router);
   postService: PostService = inject(PostService);
+  reviewService: ReviewService = inject(ReviewService);
   authService: AuthService = inject(AuthService);
   @Input() post!: Post;
   @Output() statusChanged = new EventEmitter<void>();
 
   approvePost() {
-    this.postService.approvePost(this.post.id).subscribe({
+    const review = new Review(
+      this.post.id,
+      this.authService.getUser()?.userName || '',
+      true,
+      'Post approved'
+    );
+
+    this.reviewService.createReview(review).pipe(
+      delay(100)
+    ).subscribe({
       next: () => {
         this.statusChanged.emit();
       },
       error: (error) => {
-        console.error('Error updating post:', error);
+        console.error('Error creating review:', error);
       }
     });
   }
 
   rejectPost() {
-    this.postService.rejectPost(this.post.id).subscribe({
+    const review = new Review(
+      this.post.id,
+      this.authService.getUser()?.userName || '',
+      false,
+      'Post rejected'
+    );
+
+    this.reviewService.createReview(review).pipe(
+      delay(100)
+    ).subscribe({
+      next: () => {
+        this.statusChanged.emit();
+      },
+      error: (error) => {
+        console.error('Error creating review:', error);
+      }
+    });
+  }
+
+  submitPost() {
+    this.postService.submitPost(this.post.id).subscribe({
       next: () => {
         this.statusChanged.emit();
       },

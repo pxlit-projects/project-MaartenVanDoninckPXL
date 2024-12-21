@@ -54,6 +54,12 @@ export class PostService {
     );
   }
 
+  getPostedPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.api + '/posted').pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getPostById(id: number): Observable<Post> {
     return this.http.get<Post>(this.api + '/' + id).pipe(
       catchError(this.handleError)
@@ -66,14 +72,8 @@ export class PostService {
     );
   }
 
-  approvePost(id: number): Observable<Post> {
-    return this.http.patch<Post>(this.api + '/approve/' + id, {}).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  rejectPost(id: number): Observable<Post> {
-    return this.http.patch<Post>(this.api + '/reject/' + id, {}).pipe(
+  submitPost(id: number): Observable<Post> {
+    return this.http.patch<Post>(this.api + '/submit/' + id, {}).pipe(
       catchError(this.handleError)
     );
   }

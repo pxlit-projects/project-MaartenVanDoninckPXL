@@ -20,7 +20,7 @@ export class PostListComponent implements OnInit {
   filteredPosts: Post[] = [];
 
   ngOnInit() {
-    this.postService.getApprovedPosts().subscribe((data: Post[]) => {
+    this.postService.getPostedPosts().subscribe((data: Post[]) => {
       this.posts = data;
       this.filteredPosts = data;
     });

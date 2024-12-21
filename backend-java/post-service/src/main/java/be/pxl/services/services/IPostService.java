@@ -14,9 +14,11 @@ public interface IPostService {
     List<PostResponse> getDraftPostsByAuthor(String author);
     List<PostResponse> getPendingPosts();
     List<PostResponse> getPendingPostsByAuthor(String author);
+    List<PostResponse> getPostedPosts();
     PostResponse getPostById(Long id);
     PostResponse updatePost(Long id, PostRequest postRequest);
     void updatePostWithReview(ReviewRequest reviewRequest);
     PostResponse approvePost(Long id);
     PostResponse rejectPost(Long id);
+    PostResponse submitPost(Long id);
 }

@@ -91,7 +91,7 @@ public class PostService implements IPostService {
 
     @Override
     public List<PostResponse> getPendingPosts() {
-        return postRepository.findAllByStatus(Status.valueOf("PENDING")).stream().map(post -> PostResponse.builder()
+        return postRepository.findAllByStatusIn(List.of(Status.valueOf("PENDING"), Status.valueOf("REJECTED"), Status.valueOf("APPROVED"))).stream().map(post -> PostResponse.builder()
                 .id(post.getId())
                 .reviewId(post.getReviewId())
                 .title(post.getTitle())
@@ -104,7 +104,20 @@ public class PostService implements IPostService {
 
     @Override
     public List<PostResponse> getPendingPostsByAuthor(String author) {
-        return postRepository.findAllByStatusAndAuthor(Status.valueOf("PENDING"), author).stream().map(post -> PostResponse.builder()
+        return postRepository.findAllByStatusInAndAuthor(List.of(Status.valueOf("PENDING"), Status.valueOf("REJECTED"), Status.valueOf("APPROVED")), author).stream().map(post -> PostResponse.builder()
+                .id(post.getId())
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .category(post.getCategory())
+                .build()).toList();
+    }
+
+    @Override
+    public List<PostResponse> getPostedPosts() {
+        return postRepository.findAllByStatus(Status.valueOf("POSTED")).stream().map(post -> PostResponse.builder()
                 .id(post.getId())
                 .reviewId(post.getReviewId())
                 .title(post.getTitle())
@@ -182,6 +195,22 @@ public class PostService implements IPostService {
     public PostResponse rejectPost(Long id) {
         Post post = postRepository.findById(id).orElseThrow();
         post.setStatus(Status.valueOf("REJECTED"));
+        postRepository.save(post);
+        return PostResponse.builder()
+                .id(post.getId())
+                .reviewId(post.getReviewId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .status(post.getStatus())
+                .category(post.getCategory())
+                .build();
+    }
+
+    @Override
+    public PostResponse submitPost(Long id) {
+        Post post = postRepository.findById(id).orElseThrow();
+        post.setStatus(Status.valueOf("POSTED"));
         postRepository.save(post);
         return PostResponse.builder()
                 .id(post.getId())
