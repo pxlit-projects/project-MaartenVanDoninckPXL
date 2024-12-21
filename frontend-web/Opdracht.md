@@ -20,23 +20,31 @@
 
 * **US1:** Als ``redacteur`` wil ik nieuwe ``posts`` kunnen aanmaken, zodat ik nieuws en updates kan delen met de organisatie.
   * Een redacteur moet in staat zijn om een nieuw artikel te schrijven en op te slaan in het systeem.
+  * **Completed**
 * **US2:** Als ``redacteur`` wil ik ``posts`` kunnen opslaan als concept, zodat ik er later aan kan verderwerken of kan wachten op goedkeuring.
   * Een redacteur moet een artikel kunnen opslaan als concept, zodat het later kan worden bewerkt of beoordeeld.
+  * **Completed**
 * **US3:** Als ``redacteur`` wil ik de inhoud van een ``post`` kunnen bewerken, zodat ik fouten kan corrigeren en inhoud kan bijwerken.
   * Een redacteur moet bestaande artikelen kunnen aanpassen om fouten te corrigeren of nieuwe informatie toe te voegen.
+  * **Completed**
 * **US4:** Als ``gebruiker`` wil ik een overzicht van gepubliceerde ``posts`` kunnen zien, zodat ik op de hoogte blijf van het laatste nieuws.
   * Gebruikers moeten een lijst kunnen zien van alle gepubliceerde artikelen.
+  * **Completed**
 * **US5:** Als ``gebruiker`` wil ik ``posts`` kunnen filteren op basis van inhoud, auteur & categorie.
   * Gebruikers moeten artikelen kunnen filteren op specifieke criteria zoals inhoud, auteur en categorie.
+  * **Completed**
 
 ### ReviewService
 
 * **US6:** Als ``hoofdredacteur`` wil ik ``ingediende posts`` kunnen bekijken en goedkeuren of afwijzen, zodat alleen goedgekeurde content wordt gepubliceerd.
   * Hoofdredacteuren moeten ingediende artikelen kunnen beoordelen en beslissen of ze worden gepubliceerd of afgewezen.
+  * **Completed**
 * **US7:** Als ``redacteur`` wil ik een ``melding`` ontvangen wanneer een ``post`` goedgekeurd of afgewezen is, zodat ik weet of het gepubliceerd kan worden of moet worden herzien.
   * Redacteuren moeten notificaties ontvangen over de status van hun ingediende artikelen.
-* **US8:** Als ``redacteur`` wil ik opmerkingen kunnen toevoegen bij afwijzing van een ``post``, zodat de ``redacteur`` weet welke wijzigingen er nodig zijn.
+  * **Completed**
+* **US8:** Als ``hoofdredacteur`` wil ik een opmerkingen kunnen toevoegen bij afwijzing van een ``post``, zodat de ``redacteur`` weet welke wijzigingen er nodig zijn.
   * Redacteuren moeten feedback kunnen geven bij het afwijzen van een artikel, zodat de auteur weet wat er moet worden aangepast.
+  * **Completed**
 
 ### CommentService
 

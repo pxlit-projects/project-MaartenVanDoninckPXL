@@ -2,6 +2,7 @@ package be.pxl.services.services;
 
 import be.pxl.services.domain.Post;
 import be.pxl.services.domain.Status;
+import be.pxl.services.domain.dto.DeleteReviewResponse;
 import be.pxl.services.domain.dto.PostRequest;
 import be.pxl.services.domain.dto.PostResponse;
 import be.pxl.services.domain.dto.ReviewRequest;
@@ -171,12 +172,20 @@ public class PostService implements IPostService {
     @Override
     public void updatePostWithReview(ReviewRequest reviewRequest) {
         Post post = postRepository.findById(reviewRequest.getPostId()).orElseThrow();
-        post.setReviewId(reviewRequest.getPostId());
+        post.setReviewId(reviewRequest.getReviewId());
         if (reviewRequest.isApproval()) {
             post.setStatus(Status.valueOf("APPROVED"));
         } else {
             post.setStatus(Status.valueOf("REJECTED"));
         }
+        postRepository.save(post);
+    }
+
+    @Override
+    public void updatePostWithDeletedReview(DeleteReviewResponse deleteReviewResponse) {
+        Post post = postRepository.findById(deleteReviewResponse.getPostId()).orElseThrow();
+        post.setReviewId(null);
+        post.setStatus(Status.valueOf("DRAFT"));
         postRepository.save(post);
     }
 

@@ -1,5 +1,6 @@
 package be.pxl.services.services;
 
+import be.pxl.services.domain.dto.DeleteReviewResponse;
 import be.pxl.services.domain.dto.PostRequest;
 import be.pxl.services.domain.dto.PostResponse;
 import be.pxl.services.domain.dto.ReviewRequest;
@@ -20,4 +21,5 @@ public interface IPostService {
     PostResponse updatePost(Long id, PostRequest postRequest);
     void updatePostWithReview(ReviewRequest reviewRequest);
     PostResponse submitPost(Long id);
+    void updatePostWithDeletedReview(DeleteReviewResponse deleteReviewResponse);
 }

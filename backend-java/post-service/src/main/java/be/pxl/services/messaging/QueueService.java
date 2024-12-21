@@ -1,5 +1,6 @@
 package be.pxl.services.messaging;
 
+import be.pxl.services.domain.dto.DeleteReviewResponse;
 import be.pxl.services.domain.dto.ReviewRequest;
 import be.pxl.services.services.IPostService;
 import lombok.RequiredArgsConstructor;
@@ -15,5 +16,10 @@ public class QueueService {
     @RabbitListener(queues = "post-service-queue")
     public void listen(ReviewRequest reviewRequest) {
         postService.updatePostWithReview(reviewRequest);
+    }
+
+    @RabbitListener(queues = "post-service-queue")
+    public void listen(DeleteReviewResponse deleteReviewResponse) {
+        postService.updatePostWithDeletedReview(deleteReviewResponse);
     }
 }
