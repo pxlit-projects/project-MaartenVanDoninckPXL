@@ -6,6 +6,7 @@ import be.pxl.services.domain.dto.CommentResponse;
 import java.util.List;
 
 public interface ICommentService {
-    List<CommentResponse> getComments();
     void createComment(CommentRequest commentRequest);
+    List<CommentResponse> getComments();
+    List<CommentResponse> getCommentsByPostId(Long postId);
 }

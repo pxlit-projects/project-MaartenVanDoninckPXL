@@ -7,9 +7,32 @@
     </p>
     <div class="flex justify-between items-center mt-6">
       <p class="font-bold text-sm">{{ post.category }}</p>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Details
+      <button (click)="toggleComments()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        {{ showComments ? 'Hide' : 'Show' }} Comments
       </button>
+    </div>
+
+    <div class="mt-6" [@commentsAnimation]="showComments ? 'visible' : 'hidden'">
+      <ul class="space-y-4">
+        @for (comment of comments; track comment.id) {
+        <li class="border-b pb-2">
+          <p class="font-bold text-sm">{{ comment.author }}</p>
+          <p class="text-gray-500">{{ comment.content }}</p>
+        </li>
+        }
+        @if (comments.length === 0) {
+        <li class="text-gray-500">No comments yet</li>
+        }
+      </ul>
+      <textarea [(ngModel)]="comment" [placeholder]="user ? 'Type in your comment' : 'Login to comment'"
+        [disabled]="!user" class="w-full mt-4 p-2 border border-gray-300 rounded"></textarea>
+      @if (showError) {
+      <p class="text-red-500 mt-1">Please type in a comment first</p>
+      }
+      @if (user !== null) {
+      <button (click)="addComment()"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Add Comment</button>
+      }
     </div>
   </div>
 </div>

@@ -17,14 +17,19 @@ public class CommentController {
 
     private final ICommentService commentService;
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createComment(@RequestBody CommentRequest commentRequest) {
+        commentService.createComment(commentRequest);
+    }
+
     @GetMapping
     public ResponseEntity<List<CommentResponse>> getComments() {
         return new ResponseEntity<>(commentService.getComments(), HttpStatus.OK);
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createComment(@RequestBody CommentRequest commentRequest) {
-        commentService.createComment(commentRequest);
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<CommentResponse>> getCommentsByPostId(@PathVariable Long postId) {
+        return new ResponseEntity<>(commentService.getCommentsByPostId(postId), HttpStatus.OK);
     }
 }
