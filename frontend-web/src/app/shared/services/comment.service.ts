@@ -12,8 +12,31 @@ export class CommentService {
   api: string = environment.apiUrl + '/comment/api/comments';
   http: HttpClient = inject(HttpClient);
 
+  addComment(comment: CommentRequest) {
+    return this.http.post(this.api, comment).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getCommentsByPostId(postId: number) {
     return this.http.get<Comment[]>(this.api + '/' + postId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateComment(comment: Comment) {
+    const commentRequest: CommentRequest = {
+      postId: comment.postId,
+      content: comment.content,
+      author: comment.author
+    };
+    return this.http.patch(this.api + '/' + comment.id, commentRequest).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteComment(id: number) {
+    return this.http.delete(this.api + '/' + id).pipe(
       catchError(this.handleError)
     );
   }
@@ -26,11 +49,5 @@ export class CommentService {
       errorMessage = `Something went wrong: ${error.error.message}`;
     }
     return throwError(() => new Error(errorMessage));
-  }
-
-  addComment(comment: CommentRequest) {
-    return this.http.post(this.api, comment).pipe(
-      catchError(this.handleError)
-    );
   }
 }

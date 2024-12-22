@@ -32,4 +32,14 @@ public class CommentController {
     public ResponseEntity<List<CommentResponse>> getCommentsByPostId(@PathVariable Long postId) {
         return new ResponseEntity<>(commentService.getCommentsByPostId(postId), HttpStatus.OK);
     }
+
+    @PatchMapping("/{id}")
+    public void updateComment(@PathVariable Long id, @RequestBody CommentRequest commentRequest) {
+        commentService.updateComment(id, commentRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteComment(@PathVariable Long id) {
+        commentService.deleteComment(id);
+    }
 }

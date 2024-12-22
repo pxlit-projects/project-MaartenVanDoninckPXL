@@ -16,12 +16,40 @@
       <ul class="space-y-4">
         @for (comment of comments; track comment.id) {
         <li class="border-b pb-2">
-          <p class="font-bold text-sm">{{ comment.author }}</p>
-          <p class="text-gray-500">{{ comment.content }}</p>
+          @if (editingComment?.id === comment.id) {
+          <div class="flex flex-col gap-2">
+            <textarea [(ngModel)]="editingComment!.content" class="w-full p-2 border border-gray-300 rounded">
+              </textarea>
+            <div class="flex gap-2">
+              <button (click)="updateComment(editingComment!)"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-sm">
+                Save
+              </button>
+              <button (click)="cancelEdit()"
+                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-3 rounded text-sm">
+                Cancel
+              </button>
+            </div>
+          </div>
+          } @else {
+          <div>
+            <p class="font-bold text-sm">{{ comment.author }}</p>
+            <p class="text-gray-500">{{ comment.content }}</p>
+            @if (user?.userName === comment.author) {
+            <div class="flex gap-2 mt-2">
+              <button (click)="startEdit(comment)"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-sm">
+                Edit
+              </button>
+              <button (click)="deleteComment(comment.id)"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-sm">
+                Delete
+              </button>
+            </div>
+            }
+          </div>
+          }
         </li>
-        }
-        @if (comments.length === 0) {
-        <li class="text-gray-500">No comments yet</li>
         }
       </ul>
       <textarea [(ngModel)]="comment" [placeholder]="user ? 'Type in your comment' : 'Login to comment'"

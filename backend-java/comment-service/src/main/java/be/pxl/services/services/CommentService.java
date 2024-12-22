@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +42,20 @@ public class CommentService implements ICommentService {
                 .author(comment.getAuthor())
                 .content(comment.getContent())
                 .build()).toList();
+    }
+
+    @Override
+    public void updateComment(Long id, CommentRequest commentRequest) {
+        Comment comment = commentRepository.findById(id).orElseThrow();
+        if (!Objects.equals(comment.getAuthor(), commentRequest.getAuthor())) {
+            throw new IllegalArgumentException("Only the author can update the comment");
+        }
+        comment.setContent(commentRequest.getContent());
+        commentRepository.save(comment);
+    }
+
+    @Override
+    public void deleteComment(Long id) {
+        commentRepository.deleteById(id);
     }
 }

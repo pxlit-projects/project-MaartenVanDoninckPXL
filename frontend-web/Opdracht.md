@@ -50,10 +50,13 @@
 
 * **US9:** Als ``gebruiker`` wil ik een ``reactie`` kunnen plaatsen op een ``post``, zodat ik mijn mening kan delen of vragen kan stellen.
   * Gebruikers moeten reacties kunnen plaatsen onder artikelen.
+  * **Completed**
 * **US10:** Als ``gebruiker`` wil ik ``reacties`` van andere collega’s kunnen lezen, zodat ik een indruk krijg van hun mening of vragen over het artikel.
   * Gebruikers moeten de reacties van anderen kunnen lezen om inzicht te krijgen in hun meningen en vragen.
+  * **Completed**
 * **US11:** Als ``gebruiker`` wil ik mijn eigen ``reacties`` kunnen bewerken of verwijderen, zodat ik altijd mijn eigen bijdragen kan corrigeren of verwijderen.
   * Gebruikers moeten hun eigen reacties kunnen aanpassen of verwijderen.
+  * **Completed**
 
 ## Authenticatie
 

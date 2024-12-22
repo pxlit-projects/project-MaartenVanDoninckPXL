@@ -9,4 +9,6 @@ public interface ICommentService {
     void createComment(CommentRequest commentRequest);
     List<CommentResponse> getComments();
     List<CommentResponse> getCommentsByPostId(Long postId);
+    void updateComment(Long id, CommentRequest commentRequest);
+    void deleteComment(Long id);
 }

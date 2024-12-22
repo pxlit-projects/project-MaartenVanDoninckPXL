@@ -32,6 +32,7 @@ export class PostItemComponent {
   comment: string = '';
   showError: boolean = false;
   user? = this.authService.getUser();
+  editingComment?: Comment;
 
   ngOnInit() {
     this.commentService.getCommentsByPostId(this.post.id).subscribe((data: Comment[]) => {
@@ -48,7 +49,7 @@ export class PostItemComponent {
       this.showError = true;
       return;
     }
-    
+
     const commentRequest: CommentRequest = {
       postId: this.post.id,
       content: this.comment,
@@ -61,6 +62,31 @@ export class PostItemComponent {
       });
       this.comment = '';
       this.showError = false;
+    });
+  }
+
+  startEdit(comment: Comment) {
+    this.editingComment = { ...comment };
+  }
+
+  cancelEdit() {
+    this.editingComment = undefined;
+  }
+
+  updateComment(comment: Comment) {
+    this.commentService.updateComment(comment).subscribe(() => {
+      this.commentService.getCommentsByPostId(this.post.id).subscribe((data: Comment[]) => {
+        this.comments = data;
+        this.editingComment = undefined;
+      });
+    });
+  }
+
+  deleteComment(id: number) {
+    this.commentService.deleteComment(id).subscribe(() => {
+      this.commentService.getCommentsByPostId(this.post.id).subscribe((data: Comment[]) => {
+        this.comments = data;
+      });
     });
   }
 }
