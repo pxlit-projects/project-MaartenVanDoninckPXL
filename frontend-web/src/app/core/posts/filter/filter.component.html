@@ -5,10 +5,17 @@
                 class="flex-1 px-3 py-2 border rounded-md" />
             <input type="text" placeholder="Author" [(ngModel)]="author" (input)="onFilterChange()"
                 class="flex-1 px-3 py-2 border rounded-md" />
-            <select [(ngModel)]="category" (change)="onFilterChange()" class="flex-1 px-3 py-2 border rounded-md">
+            <div class="flex-1 flex space-x-2">
+                <input type="date" [(ngModel)]="startDate" (input)="onFilterChange()"
+                    class="w-1/2 px-3 py-2 border rounded-md" title="Start date"/>
+                <input type="date" [(ngModel)]="endDate" (input)="onFilterChange()"
+                    class="w-1/2 px-3 py-2 border rounded-md" title="End date"/>
+            </div>
+            <select [(ngModel)]="category" (change)="onFilterChange()" 
+                class="flex-1 px-3 py-2 border rounded-md">
                 <option value="">All Categories</option>
                 @for (category of categories; track category) {
-                <option [value]="category">{{ category }}</option>
+                    <option [value]="category">{{ category }}</option>
                 }
             </select>
         </div>

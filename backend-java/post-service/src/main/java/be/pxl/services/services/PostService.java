@@ -10,6 +10,7 @@ import be.pxl.services.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,6 +27,7 @@ public class PostService implements IPostService {
                 .author(postRequest.getAuthor())
                 .status(postRequest.getStatus())
                 .category(postRequest.getCategory())
+                .createdOn(LocalDateTime.now())
                 .build();
         postRepository.save(post);
         return PostResponse.builder()
@@ -36,6 +38,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build();
     }
 
@@ -48,6 +51,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build()).toList();
     }
 
@@ -61,6 +65,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build()).toList();
     }
 
@@ -74,6 +79,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build()).toList();
     }
 
@@ -87,6 +93,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build()).toList();
     }
 
@@ -100,6 +107,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build()).toList();
     }
 
@@ -113,6 +121,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build()).toList();
     }
 
@@ -126,6 +135,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build()).toList();
     }
 
@@ -145,6 +155,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build();
     }
 
@@ -166,6 +177,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build();
     }
 
@@ -202,6 +214,7 @@ public class PostService implements IPostService {
                 .author(post.getAuthor())
                 .status(post.getStatus())
                 .category(post.getCategory())
+                .createdOn(post.getCreatedOn())
                 .build();
     }
 }

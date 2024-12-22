@@ -34,12 +34,17 @@ export class PostDraftListComponent {
 
   onFilterChange(filterCriteria: any) {
     this.filteredPosts = this.posts.filter(post => {
-      const matchesTitle = post.title.includes(filterCriteria.title);
-      const matchesAuthor = post.author.includes(filterCriteria.author);
-      const matchesCategory =
-        !filterCriteria.category || post.category === filterCriteria.category;
+      const postDate = new Date(post.createdOn);
+      const startDate = filterCriteria.startDate ? new Date(filterCriteria.startDate) : null;
+      const endDate = filterCriteria.endDate ? new Date(filterCriteria.endDate) : null;
 
-      return matchesTitle && matchesAuthor && matchesCategory;
+      const matchesTitle = post.title.toLowerCase().includes(filterCriteria.title.toLowerCase());
+      const matchesAuthor = post.author.toLowerCase().includes(filterCriteria.author.toLowerCase());
+      const matchesCategory = !filterCriteria.category || post.category === filterCriteria.category;
+      const matchesDateRange = (!startDate || postDate >= startDate) &&
+        (!endDate || postDate <= endDate);
+
+      return matchesTitle && matchesAuthor && matchesCategory && matchesDateRange;
     });
   }
 }

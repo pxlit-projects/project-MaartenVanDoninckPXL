@@ -9,11 +9,12 @@ import { delay } from 'rxjs';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { FormsModule } from '@angular/forms';
 import { RejectionMessage } from '../../../shared/models/rejection-message.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-post-pending-item',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './post-pending-item.component.html',
   styleUrl: './post-pending-item.component.css'
 })

@@ -26,7 +26,8 @@ export class EditPostComponent implements OnInit {
     content: ['', Validators.required],
     author: ['', Validators.required],
     status: [{ value: '', disabled: true }],
-    category: ['', Validators.required]
+    category: ['', Validators.required],
+    createdOn: [{ value: new Date(), disabled: true }]
   });
 
   ngOnInit(): void {
@@ -58,7 +59,8 @@ export class EditPostComponent implements OnInit {
         formValue.content ?? '',
         formValue.author ?? '',
         formValue.status ?? '',
-        formValue.category as Category ?? ''
+        formValue.category as Category ?? '',
+        formValue.createdOn ?? new Date()
       );
       this.postService.updatePost(updatedPost).subscribe({
         next: () => {
@@ -81,7 +83,8 @@ export class EditPostComponent implements OnInit {
         formValue.content ?? '',
         formValue.author ?? '',
         'PENDING',
-        formValue.category as Category ?? ''
+        formValue.category as Category ?? '',
+        formValue.createdOn ?? new Date()
       );
       this.postService.updatePost(updatedPost).subscribe({
         next: () => {

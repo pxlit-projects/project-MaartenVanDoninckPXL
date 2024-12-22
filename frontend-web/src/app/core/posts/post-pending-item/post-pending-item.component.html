@@ -10,6 +10,7 @@
             <div>
                 <p class="font-bold text-sm">{{ post.category }}</p>
                 <p class="text-gray-500">{{post.status}}</p>
+                <p class="text-sm text-gray-500">{{ post.createdOn | date:'dd/MM/yyyy HH:mm' }}</p>
             </div>
             @if (post.status === 'APPROVED' && authService.getUser()?.userName === post.author) {
             <button type="button" (click)="submitPost()"

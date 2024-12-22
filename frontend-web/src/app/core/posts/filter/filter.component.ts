@@ -13,6 +13,8 @@ export class FilterComponent {
   title: string = '';
   author: string = '';
   category: Category | '' = '';
+  startDate: string = '';
+  endDate: string = '';
   categories = Object.values(Category);
 
   @Output() filterChanged = new EventEmitter<any>();
@@ -21,6 +23,8 @@ export class FilterComponent {
     this.filterChanged.emit({
       title: this.title,
       author: this.author,
+      startDate: this.startDate,
+      endDate: this.endDate,
       category: this.category
     });
   }

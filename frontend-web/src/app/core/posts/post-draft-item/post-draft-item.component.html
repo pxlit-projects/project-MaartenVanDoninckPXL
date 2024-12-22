@@ -9,6 +9,7 @@
             <div>
                 <p class="font-bold text-sm">{{ post.category }}</p>
                 <p class="text-gray-500">{{post.status}}</p>
+                <p class="text-sm text-gray-500">{{ post.createdOn | date:'dd/MM/yyyy HH:mm' }}</p>
             </div>
             <a [routerLink]="['/edit', post.id]"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded cursor-pointer">
