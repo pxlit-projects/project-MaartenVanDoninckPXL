@@ -4,6 +4,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { Post } from '../../../shared/models/post.model';
 import { PostPendingItemComponent } from "../post-pending-item/post-pending-item.component";
 import { FilterComponent } from "../filter/filter.component";
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-post-pending-list',
@@ -18,17 +19,22 @@ export class PostPendingListComponent {
   posts: Post[] = [];
   filteredPosts: Post[] = [];
 
-  ngOnInit() {
-    if (this.authService.hasRole('hoofdredacteur')) {
-      this.postService.getPendingPosts().subscribe((data: Post[]) => {
-        this.posts = data;
-        this.filteredPosts = data;
-      });
-    } else {
-      this.postService.getPendingPostsByAuthor(this.authService.getUser()!.userName).subscribe((data: Post[]) => {
-        this.posts = data;
-        this.filteredPosts = data;
-      });
+  async ngOnInit(): Promise<void> {
+    await this.loadPosts();
+  }
+
+  async loadPosts(): Promise<void> {
+    try {
+      if (this.authService.hasRole('hoofdredacteur')) {
+        this.posts = await firstValueFrom(this.postService.getPendingPosts());
+      } else {
+        this.posts = await firstValueFrom(
+          this.postService.getPendingPostsByAuthor(this.authService.getUser()!.userName)
+        );
+      }
+      this.filteredPosts = this.posts;
+    } catch (error) {
+      console.error(error);
     }
   }
 

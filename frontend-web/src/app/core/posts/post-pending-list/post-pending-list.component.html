@@ -2,7 +2,7 @@
 <div class="md:container md:mx-auto container mx-auto mt-10">
     <div class="grid grid-cols-3 gap-6">
         @for (post of filteredPosts; track post.id) {
-            <app-post-pending-item [post]="post" (statusChanged)="ngOnInit()"></app-post-pending-item>
+            <app-post-pending-item [post]="post" (statusChanged)="loadPosts()"></app-post-pending-item>
         }
     </div>
 </div>

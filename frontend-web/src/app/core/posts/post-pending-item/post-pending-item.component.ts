@@ -5,7 +5,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { PostService } from '../../../shared/services/post.service';
 import { ReviewService } from '../../../shared/services/review.service';
 import { Review } from '../../../shared/models/review.model';
-import { delay } from 'rxjs';
+import { delay, firstValueFrom, timer } from 'rxjs';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { FormsModule } from '@angular/forms';
 import { RejectionMessage } from '../../../shared/models/rejection-message.model';
@@ -31,46 +31,38 @@ export class PostPendingItemComponent implements OnInit {
   showError: boolean = false;
   rejectionMessage: RejectionMessage | null = null;
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
     if (this.post.status === 'REJECTED') {
-      this.reviewService.getRejectionMessageById(this.post.reviewId).subscribe({
-        next: (message) => {
-          this.rejectionMessage = message;
-        },
-        error: (error) => {
-          console.error('Error getting rejection message:', error);
-        }
-      });
+      try {
+        this.rejectionMessage = await firstValueFrom(this.reviewService.getRejectionMessageById(this.post.reviewId));
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
-  approvePost() {
+  async approvePost() {
     const review = new Review(
       this.post.id,
       this.authService.getUser()?.userName || '',
       true,
       'Post approved'
     );
-
-    this.reviewService.createReview(review).pipe(
-      delay(100)
-    ).subscribe({
-      next: () => {
-        this.statusChanged.emit();
-        this.notificationService.notifyReviewUpdate();
-      },
-      error: (error) => {
-        console.error('Error creating review:', error);
-      }
-    });
+    try {
+      await firstValueFrom(this.reviewService.createReview(review));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      this.statusChanged.emit();
+      this.notificationService.notifyReviewUpdate();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  rejectPost() {
+  async rejectPost() {
     if (!this.rejectReason.trim()) {
       this.showError = true;
       return;
     }
-
     this.showError = false;
     const review = new Review(
       this.post.id,
@@ -79,56 +71,45 @@ export class PostPendingItemComponent implements OnInit {
       this.rejectReason
     );
 
-    this.reviewService.createReview(review).pipe(
-      delay(100)
-    ).subscribe({
-      next: () => {
-        this.statusChanged.emit();
-        this.notificationService.notifyReviewUpdate();
-      },
-      error: (error) => {
-        console.error('Error creating review:', error);
-      }
-    });
+    try {
+      await firstValueFrom(this.reviewService.createReview(review));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      this.statusChanged.emit();
+      this.notificationService.notifyReviewUpdate();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  submitPost() {
-    this.postService.submitPost(this.post.id).pipe(
-      delay(100)
-    ).subscribe({
-      next: () => {
-        this.statusChanged.emit();
-        this.notificationService.notifyReviewUpdate();
-      },
-      error: (error) => {
-        console.error('Error updating post:', error);
-      }
-    });
+  async submitPost() {
+    try {
+      await firstValueFrom(this.postService.submitPost(this.post.id));
+      this.statusChanged.emit();
+      this.notificationService.notifyReviewUpdate();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  editPost() {
-    this.reviewService.deleteReview(this.post.reviewId).pipe(
-      delay(100)
-    ).subscribe({
-      next: () => {
-        this.router.navigate(['/edit', this.post.id]);
-        this.statusChanged.emit();
-        this.notificationService.notifyReviewUpdate();
-      },
-      error: (error) => {
-        console.error('Error deleting review:', error);
-      }
-    });
+  async editPost() {
+    try {
+      await firstValueFrom(this.reviewService.deleteReview(this.post.reviewId));
+      this.router.navigate(['/edit', this.post.id]);
+      this.statusChanged.emit();
+      this.notificationService.notifyReviewUpdate();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  getRejectionMessage() {
-    this.reviewService.getRejectionMessageById(this.post.reviewId).subscribe({
-      next: (message) => {
-        alert(message);
-      },
-      error: (error) => {
-        console.error('Error getting rejection message:', error);
-      }
-    });
+  async getRejectionMessage() {
+    try {
+      this.rejectionMessage = await firstValueFrom(this.reviewService.getRejectionMessageById(this.post.reviewId));
+      this.statusChanged.emit();
+      this.notificationService.notifyReviewUpdate();
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
+

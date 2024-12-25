@@ -70,8 +70,8 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<PostResponse> getApprovedPosts() {
-        return postRepository.findAllByStatus(Status.valueOf("APPROVED")).stream().map(post -> PostResponse.builder()
+    public List<PostResponse> getDraftPostsByAuthor(String author) {
+        return postRepository.findAllByStatusAndAuthor(Status.valueOf("DRAFT"), author).stream().map(post -> PostResponse.builder()
                 .id(post.getId())
                 .reviewId(post.getReviewId())
                 .title(post.getTitle())
@@ -84,8 +84,8 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<PostResponse> getDraftPostsByAuthor(String author) {
-        return postRepository.findAllByStatusAndAuthor(Status.valueOf("DRAFT"), author).stream().map(post -> PostResponse.builder()
+    public List<PostResponse> getApprovedPosts() {
+        return postRepository.findAllByStatus(Status.valueOf("APPROVED")).stream().map(post -> PostResponse.builder()
                 .id(post.getId())
                 .reviewId(post.getReviewId())
                 .title(post.getTitle())

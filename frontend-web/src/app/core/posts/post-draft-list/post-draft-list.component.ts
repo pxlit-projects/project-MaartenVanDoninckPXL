@@ -4,6 +4,7 @@ import { PostService } from '../../../shared/services/post.service';
 import { Post } from '../../../shared/models/post.model';
 import { PostDraftItemComponent } from "../post-draft-item/post-draft-item.component";
 import { AuthService } from '../../../shared/services/auth.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-post-draft-list',
@@ -18,17 +19,18 @@ export class PostDraftListComponent {
   posts: Post[] = [];
   filteredPosts: Post[] = [];
 
-  ngOnInit() {
-    if (this.authService.hasRole('hoofdredacteur')) {
-      this.postService.getPostsInDraft().subscribe((data: Post[]) => {
-        this.posts = data;
-        this.filteredPosts = data;
-      });
-    } else {
-      this.postService.getPostsInDraftByAuthor(this.authService.getUser()!.userName).subscribe((data: Post[]) => {
-        this.posts = data;
-        this.filteredPosts = data;
-      });
+  async ngOnInit(): Promise<void> {
+    try {
+      if (this.authService.hasRole('hoofdredacteur')) {
+        this.posts = await firstValueFrom(this.postService.getPostsInDraft());
+      } else {
+        this.posts = await firstValueFrom(
+          this.postService.getPostsInDraftByAuthor(this.authService.getUser()!.userName)
+        );
+      }
+      this.filteredPosts = this.posts;
+    } catch (error) {
+      console.error(error);
     }
   }
 

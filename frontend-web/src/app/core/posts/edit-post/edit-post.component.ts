@@ -3,6 +3,7 @@ import { PostService } from '../../../shared/services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Post, Category } from '../../../shared/models/post.model';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-edit-post',
@@ -30,26 +31,24 @@ export class EditPostComponent implements OnInit {
     createdOn: [{ value: new Date(), disabled: true }]
   });
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     console.log('Route ID:', id);
     if (id) {
-      this.postService.getPostById(id).subscribe({
-        next: (post) => {
-          console.log('Fetched post:', post);
-          this.postForm.patchValue(post);
-        },
-        error: (error) => {
-          console.error('Error fetching post:', error);
-        }
-      });
+      try {
+        const post = await firstValueFrom(this.postService.getPostById(id));
+        this.postForm.patchValue(post);
+      } catch (error) {
+        console.error(error);
+        this.router.navigate(['/draft']);
+      }
     } else {
       console.error('Invalid post ID');
       this.router.navigate(['/draft']);
     }
   }
 
-  onUpdate(): void {
+  async onUpdate(): Promise<void> {
     if (this.postForm.valid) {
       const formValue = this.postForm.getRawValue();
       const updatedPost = new Post(
@@ -62,18 +61,16 @@ export class EditPostComponent implements OnInit {
         formValue.category as Category ?? '',
         formValue.createdOn ?? new Date()
       );
-      this.postService.updatePost(updatedPost).subscribe({
-        next: () => {
-          this.router.navigate(['/draft']);
-        },
-        error: (error) => {
-          console.error('Error updating post:', error);
-        }
-      });
+      try {
+        await firstValueFrom(this.postService.updatePost(updatedPost));
+        this.router.navigate(['/draft']);
+      } catch (error) {
+        console.error('Error updating post:', error);
+      }
     }
   }
 
-  onSubmitForReview(): void {
+  async onSubmitForReview(): Promise<void> {
     if (this.postForm.valid) {
       const formValue = this.postForm.getRawValue();
       const updatedPost = new Post(
@@ -86,14 +83,12 @@ export class EditPostComponent implements OnInit {
         formValue.category as Category ?? '',
         formValue.createdOn ?? new Date()
       );
-      this.postService.updatePost(updatedPost).subscribe({
-        next: () => {
-          this.router.navigate(['/draft']);
-        },
-        error: (error) => {
-          console.error('Error updating post:', error);
-        }
-      });
+      try {
+        await firstValueFrom(this.postService.updatePost(updatedPost));
+        this.router.navigate(['/draft']);
+      } catch (error) {
+        console.error('Error updating post:', error);
+      }
     }
   }
 }

@@ -7,6 +7,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../shared/services/auth.service';
 import { CommentRequest } from '../../../shared/models/comment-request.model';
+import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-post-item',
   standalone: true,
@@ -34,17 +35,19 @@ export class PostItemComponent {
   user? = this.authService.getUser();
   editingComment?: Comment;
 
-  ngOnInit() {
-    this.commentService.getCommentsByPostId(this.post.id).subscribe((data: Comment[]) => {
-      this.comments = data;
-    });
+  async ngOnInit(): Promise<void> {
+    try {
+      this.comments = await firstValueFrom(this.commentService.getCommentsByPostId(this.post.id));
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   toggleComments() {
     this.showComments = !this.showComments;
   }
 
-  addComment() {
+  async addComment() {
     if (!this.comment) {
       this.showError = true;
       return;
@@ -56,13 +59,14 @@ export class PostItemComponent {
       author: this.user!.userName
     }
 
-    this.commentService.addComment(commentRequest).subscribe(() => {
-      this.commentService.getCommentsByPostId(this.post.id).subscribe((data: Comment[]) => {
-        this.comments = data;
-      });
+    try {
+      await firstValueFrom(this.commentService.addComment(commentRequest));
+      this.comments = await firstValueFrom(this.commentService.getCommentsByPostId(this.post.id));
       this.comment = '';
       this.showError = false;
-    });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   startEdit(comment: Comment) {
@@ -73,20 +77,22 @@ export class PostItemComponent {
     this.editingComment = undefined;
   }
 
-  updateComment(comment: Comment) {
-    this.commentService.updateComment(comment).subscribe(() => {
-      this.commentService.getCommentsByPostId(this.post.id).subscribe((data: Comment[]) => {
-        this.comments = data;
-        this.editingComment = undefined;
-      });
-    });
+  async updateComment(comment: Comment) {
+    try {
+      await firstValueFrom(this.commentService.updateComment(comment));
+      this.comments = await firstValueFrom(this.commentService.getCommentsByPostId(this.post.id));
+      this.editingComment = undefined;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  deleteComment(id: number) {
-    this.commentService.deleteComment(id).subscribe(() => {
-      this.commentService.getCommentsByPostId(this.post.id).subscribe((data: Comment[]) => {
-        this.comments = data;
-      });
-    });
+  async deleteComment(id: number) {
+    try {
+      await firstValueFrom(this.commentService.deleteComment(id));
+      this.comments = await firstValueFrom(this.commentService.getCommentsByPostId(this.post.id));
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

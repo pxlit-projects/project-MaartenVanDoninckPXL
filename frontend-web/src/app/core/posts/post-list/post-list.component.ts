@@ -3,6 +3,7 @@ import { FilterComponent } from "../filter/filter.component";
 import { PostItemComponent } from "../post-item/post-item.component";
 import { PostService } from "../../../shared/services/post.service";
 import { Post } from "../../../shared/models/post.model";
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-post-list',
@@ -19,11 +20,13 @@ export class PostListComponent implements OnInit {
   posts: Post[] = [];
   filteredPosts: Post[] = [];
 
-  ngOnInit() {
-    this.postService.getPostedPosts().subscribe((data: Post[]) => {
-      this.posts = data;
-      this.filteredPosts = data;
-    });
+  async ngOnInit(): Promise<void> {
+    try {
+      this.posts = await firstValueFrom(this.postService.getPostedPosts());
+      this.filteredPosts = this.posts;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   onFilterChange(filterCriteria: any) {

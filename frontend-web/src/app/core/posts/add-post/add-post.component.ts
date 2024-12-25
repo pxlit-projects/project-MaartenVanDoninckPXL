@@ -1,9 +1,10 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {PostService} from "../../../shared/services/post.service";
-import {Category, Post} from "../../../shared/models/post.model";
-import {Router} from "@angular/router";
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { PostService } from "../../../shared/services/post.service";
+import { Category, Post } from "../../../shared/models/post.model";
+import { Router } from "@angular/router";
 import { AuthService } from '../../../shared/services/auth.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-add-post',
@@ -30,39 +31,39 @@ export class AddPostComponent {
 
   errorMessage: string | null = null;
 
-  onSubmitForReview() {
+  async onSubmitForReview() {
     this.errorMessage = null;
     if (this.postForm.valid) {
       const newPost: Post = {
         ...this.postForm.value,
         status: 'PENDING'
       };
-      this.postService.addPost(newPost).subscribe({
-        next: () => {
-          this.postForm.reset();
-          this.router.navigate(['/posts']);
-        },
-        error: (error) => this.errorMessage = error.message
-      });
+      try {
+        await firstValueFrom(this.postService.addPost(newPost));
+        this.postForm.reset();
+        this.router.navigate(['/posts']);
+      } catch (error: any) {
+        this.errorMessage = error.message;
+      }
     } else {
       this.errorMessage = 'Please fill out the form before submitting';
     }
   }
 
-  onDraft() {
+  async onDraft() {
     this.errorMessage = null;
     if (this.postForm.valid) {
       const newPost: Post = {
         ...this.postForm.value,
         status: 'DRAFT'
       };
-      this.postService.addPost(newPost).subscribe({
-        next: () => {
-          this.postForm.reset();
-          this.router.navigate(['/posts']);
-        },
-        error: (error) => this.errorMessage = error.message
-      });
+      try {
+        await firstValueFrom(this.postService.addPost(newPost));
+        this.postForm.reset();
+        this.router.navigate(['/posts']);
+      } catch (error: any) {
+        this.errorMessage = error.message;
+      }
     } else {
       this.errorMessage = 'Please fill out the form before saving as draft';
     }

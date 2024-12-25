@@ -47,7 +47,7 @@ public class ReviewService implements IReviewService {
     public List<ReviewResponse> getReviews() {
         return reviewRepository.findAll().stream().map(review -> ReviewResponse.builder()
                 .postId(review.getPostId())
-                .postId(review.getId())
+                .reviewId(review.getId())
                 .approval(review.isApproval())
                 .build()).toList();
     }

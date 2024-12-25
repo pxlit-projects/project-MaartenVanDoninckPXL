@@ -17,11 +17,6 @@ public class ReviewController {
 
     private final IReviewService reviewService;
 
-    @GetMapping
-    public ResponseEntity<List<ReviewResponse>> getReviews() {
-        return new ResponseEntity<>(reviewService.getReviews(), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<?> createReview(@RequestBody ReviewRequest reviewRequest) {
         try {
@@ -30,6 +25,11 @@ public class ReviewController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ReviewResponse>> getReviews() {
+        return new ResponseEntity<>(reviewService.getReviews(), HttpStatus.OK);
     }
 
     @GetMapping("/rejection/{reviewId}")
