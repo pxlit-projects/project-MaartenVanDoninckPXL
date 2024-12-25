@@ -5,7 +5,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { PostService } from '../../../shared/services/post.service';
 import { ReviewService } from '../../../shared/services/review.service';
 import { Review } from '../../../shared/models/review.model';
-import { delay, firstValueFrom, timer } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { FormsModule } from '@angular/forms';
 import { RejectionMessage } from '../../../shared/models/rejection-message.model';
