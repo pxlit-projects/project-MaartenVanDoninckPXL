@@ -34,6 +34,16 @@ services:
     networks:
       - backend-java
 
+  message-broker:
+    image: rabbitmq:management
+    container_name: rabbitmq2
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
 networks:
   backend-java:
     driver: bridge

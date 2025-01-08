@@ -32,7 +32,12 @@ public class QueueConfiguration {
     }
 
     @Bean
-    public Queue postServiceQueue() {
-        return new Queue("post-service-queue", true);
+    public Queue postServiceCreateQueue() {
+        return new Queue("post-service-create-queue", true);
+    }
+
+    @Bean
+    public Queue postServiceDeleteQueue() {
+        return new Queue("post-service-delete-queue", true);
     }
 }

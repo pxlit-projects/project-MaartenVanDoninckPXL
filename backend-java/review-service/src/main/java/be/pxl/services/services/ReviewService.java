@@ -41,7 +41,7 @@ public class ReviewService implements IReviewService {
                 .content(review.getContent())
                 .build();
 
-        rabbitTemplate.convertAndSend("post-service-queue", reviewResponse);
+        rabbitTemplate.convertAndSend("post-service-create-queue", reviewResponse);
     }
 
     public List<ReviewResponse> getReviews() {
@@ -81,6 +81,6 @@ public class ReviewService implements IReviewService {
                 .postId(review.getPostId())
                 .build();
 
-        rabbitTemplate.convertAndSend("post-service-queue", deleteReviewResponse);
+        rabbitTemplate.convertAndSend("post-service-delete-queue", deleteReviewResponse);
     }
 }

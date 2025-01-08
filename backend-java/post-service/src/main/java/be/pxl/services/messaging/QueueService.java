@@ -13,12 +13,12 @@ public class QueueService {
 
     private final IPostService postService;
 
-    @RabbitListener(queues = "post-service-queue")
+    @RabbitListener(queues = "post-service-create-queue")
     public void listen(ReviewRequest reviewRequest) {
         postService.updatePostWithReview(reviewRequest);
     }
 
-    @RabbitListener(queues = "post-service-queue")
+    @RabbitListener(queues = "post-service-delete-queue")
     public void listen(DeleteReviewResponse deleteReviewResponse) {
         postService.updatePostWithDeletedReview(deleteReviewResponse);
     }
