@@ -9,11 +9,26 @@ import { PostPendingListComponent } from './core/posts/post-pending-list/post-pe
 
 export const routes: Routes = [
   { path: '', redirectTo: 'posts', pathMatch: 'full' },
-  { path: 'posts', component: PostListComponent },
-  { path: 'pending', component: PostPendingListComponent },
-  { path: 'draft', component: PostDraftListComponent },
-  { path: 'add', component: AddPostComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'posts', component: PostListComponent },
+  {
+    path: 'pending',
+    component: PostPendingListComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['redacteur', 'hoofdredacteur'] }
+  },
+  {
+    path: 'draft',
+    component: PostDraftListComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['redacteur', 'hoofdredacteur'] }
+  },
+  {
+    path: 'add',
+    component: AddPostComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['redacteur', 'hoofdredacteur'] }
+  },
   {
     path: 'edit/:id',
     component: EditPostComponent,
